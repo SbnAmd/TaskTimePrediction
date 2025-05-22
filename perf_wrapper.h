@@ -7,7 +7,7 @@
 
 #include "def.h"
 #include "stack.h"
-
+#include "barrier.h"
 
 void init_pe(int task_id);
 void deinit_pe(int task_id);

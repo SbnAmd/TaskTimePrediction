@@ -107,7 +107,8 @@ void benchmark_random_numbers() {
     srand((unsigned)time(NULL));
     double sum = 0.0;
     for (int i = 0; i < 100000; ++i) {
-        sum += rand() / (double)RAND_MAX;
+        // sum += rand() / (double)RAND_MAX;
+        sum += i / (double)RAND_MAX;
     }
     // printf("Random sum: %f\n", sum);
 }
@@ -150,7 +151,7 @@ void benchmark_sorting() {
     int *arr = malloc(ARRAY_SIZE * sizeof(int));
     if (!arr) return;
     for (int i = 0; i < ARRAY_SIZE; ++i) {
-        arr[i] = rand() % 100000;
+        arr[i] = i % 100000;
     }
     quicksort(arr, 0, ARRAY_SIZE - 1);
     free(arr);

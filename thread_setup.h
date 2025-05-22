@@ -6,7 +6,8 @@
 #define SCHEDULER_H
 
 #include "perf_wrapper.h"
-
+#include "barrier.h"
+#include "perf.h"
 #define MAX_PRIORITY 90
 #define MIN_PRIORITY 30
 

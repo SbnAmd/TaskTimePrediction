@@ -3,12 +3,13 @@
 
 
 struct task_stat task_stat_arr[NUM_THREADS];
-
+extern struct timespec g_start_time;
 IntStack preemption_stack;
-
+pthread_mutex_t stack_mtx;
+int event_open[NUM_THREADS] = {0};
 extern Func task_array[NUM_THREADS];
 extern int  stop;
-
+extern barrier_t barrier;
 uint64_t event_configs[NUM_EVENTS] = {
     PERF_COUNT_HW_CPU_CYCLES,
     PERF_COUNT_HW_INSTRUCTIONS,
@@ -59,11 +60,13 @@ void deinit_pe(int task_id) {
 
 void reset_perf_counter(int task_id) {
     // ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP);
-    if (task_stat_arr[task_id].perf_open == 1) {
-    // if (1) {
+    //fixme
+    // if (task_stat_arr[task_id].perf_open == 1) {
+    if (event_open[task_id] == 0) {
         if (ioctl(task_stat_arr[task_id].fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) == -1) {
             perror("Reset failed");
             print_fds(task_id);
+            printstack(&preemption_stack);
             exit(1 );
         }
     }
@@ -72,29 +75,34 @@ void reset_perf_counter(int task_id) {
 
 void enable_perf_counter(int task_id) {
     // ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP);
-    if (task_stat_arr[task_id].perf_open == 0) {
-    // if (1) {
+    //fixme
+    // if (task_stat_arr[task_id].perf_open == 0) {
+    if (event_open[task_id] == 0) {
         if (ioctl(task_stat_arr[task_id].fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) == -1) {
             perror("Enable failed");
             print_fds(task_id);
+            printstack(&preemption_stack);
             exit(1);
         }
         task_stat_arr[task_id].perf_open = 1;
+        event_open[task_id] = 1;
 
     }
 }
 
 void disable_perf_counter(int task_id) {
     // ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP);
-    if (task_stat_arr[task_id].perf_open == 1) {
-    // if (1) {
+    //fixme
+    // if (task_stat_arr[task_id].perf_open == 1) {
+    if (event_open[task_id] == 1) {
         if (ioctl(task_stat_arr[task_id].fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) == -1) {
             perror("Disable failed");
             print_fds(task_id);
+            printstack(&preemption_stack);
             exit(1);
         }
         task_stat_arr[task_id].perf_open = 0;
-
+        event_open[task_id] = 0;
     }
 }
 
@@ -114,7 +122,6 @@ void append_perf_counter(int task_id) {
 
     memcpy(buffer1, &task_stat_arr[task_id].perf_parameters, sizeof(struct perf_param));
     for (int i = 0; i < NUM_EVENTS; ++i){
-        // read(fds[i], &counts[i], sizeof(uint64_t));
         if (read(task_stat_arr[task_id].fds[i], &buffer[i], sizeof(long long)) == -1)
             perror("read failed");
         buffer[i] += buffer1[i];
@@ -130,51 +137,54 @@ int check_status(int task_id) {
     if (!isEmpty(&preemption_stack)) {
         old_task_id = peek(&preemption_stack);
     }
-    push(&preemption_stack, task_id);
 
     if (old_task_id != -1) {
-        // printf("Preempting task[%d] with old task[%d]\n", task_id, old_task_id);
-        task_stat_arr[task_id].state = RUN;
+        printf("Preempting task[%d] with old task[%d]\n", task_id, old_task_id);
         task_stat_arr[old_task_id].state = BLOCK;
         task_stat_arr[old_task_id].preemption += 1;
-        // fixme
-        disable_perf_counter(old_task_id);
-        append_perf_counter(old_task_id);
-    }else {
-        task_stat_arr[task_id].state = RUN;
     }
 
+    task_stat_arr[task_id].state = RUN;
+
+#ifdef RECORD_PERF_COUNT
     reset_perf_counter(task_id);
     enable_perf_counter(task_id);
+#endif
+
+    push(&preemption_stack, task_id);
 
     return old_task_id;
 }
 
 void return_status(int task_id, int old_task_id) {
+    struct timespec end_time;
 
-    // if (old_task_id != -1) {
-    //     //fixme
-    //     reset_perf_counter(old_task_id);
-    //     enable_perf_counter(old_task_id);
-    //     task_stat_arr[old_task_id].state = RUN;
-    // }
+#ifdef RECORD_PERF_COUNT
     disable_perf_counter(task_id);
     read_perf_counter(task_id);
+#endif
+    if (task_id != peek(&preemption_stack)) {
+        printf("task_id = %d, peek = %d\n", task_id, peek(&preemption_stack));
+        printstack(&preemption_stack);
+        exit(1);
+    }
+    pop(&preemption_stack);
 
     if (!isEmpty(&preemption_stack)) {
-        pop(&preemption_stack);
-        if (!isEmpty(&preemption_stack)) {
-            old_task_id = peek(&preemption_stack);
-            reset_perf_counter(old_task_id);
-            enable_perf_counter(old_task_id);
-            task_stat_arr[old_task_id].state = RUN;
-        }
+        old_task_id = peek(&preemption_stack);
+#ifdef RECORD_PERF_COUNT
+        reset_perf_counter(old_task_id);
+        enable_perf_counter(old_task_id);
+#endif
+        task_stat_arr[old_task_id].state = RUN;
     }
+
 
     task_stat_arr[task_id].state = SUSPEND;
     task_stat_arr[task_id].execution_times[task_stat_arr[task_id].instance] = get_time_diff(task_stat_arr[task_id].start_time, task_stat_arr[task_id].end_time);
     task_stat_arr[task_id].instance += 1;
-
+    clock_gettime(CLOCK_MONOTONIC, &end_time);
+    printf("Task[%d] inst %ld done at point %ld\n", task_id, task_stat_arr[task_id].instance, get_time_diff(g_start_time, end_time));
 
 }
 
@@ -197,24 +207,29 @@ void* perf_wrapper(void* arg)
 {
     int task_id = *((int*)arg);
     int old_task_id;
-    printf("Task[%d] started \n", task_id);
+    barrier_wait(&barrier);
+    usleep(10000);
+#ifdef RECORD_PERF_COUNT
     init_pe(task_id);
+#endif
     init_task_status(task_id);
     while (stop == 0) {
-        clock_gettime(CLOCK_MONOTONIC, &task_stat_arr[task_id].start_time);
-        old_task_id = check_status(task_id);
 
+        old_task_id = check_status(task_id);
+        clock_gettime(CLOCK_MONOTONIC, &task_stat_arr[task_id].start_time);
 
         // Simulated workload
-
         task_array[task_id]();
-        // printf("Task[%d] round %ld\n", task_id,cnt);
+        // printf("Task[%d] running\n", task_id);
 
         clock_gettime(CLOCK_MONOTONIC, &task_stat_arr[task_id].end_time);
         return_status(task_id, old_task_id);
+
         usleep(1000);
     }
+#ifdef RECORD_PERF_COUNT
     printf("Task[%d] executed %ld times, preempted %d times\n", task_id, task_stat_arr[task_id].instance, task_stat_arr[task_id].preemption);
     deinit_pe(task_id);
+#endif
     deinit_task_status(task_id);
 }

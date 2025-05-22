@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include "thread_setup.h"
 #include "perf.h"
-
+#include "test/test_sched_fifo.h"
 int stop = 0;
 
 

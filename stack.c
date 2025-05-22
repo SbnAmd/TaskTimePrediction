@@ -5,7 +5,7 @@
 #include "stack.h"
 
 
-#define INITIAL_CAPACITY 100
+#define INITIAL_CAPACITY 1000
 
 
 
@@ -62,6 +62,16 @@ void freeStack(IntStack *stack) {
     stack->data = NULL;
     stack->top = -1;
     stack->capacity = 0;
+}
+
+void printstack(IntStack *stack) {
+    if (!isEmpty(stack)) {
+        printf("Stack: ");
+        for (int i = 0; i <= stack->top; i++) {
+            printf("%d - ", stack->data[i]);
+        }
+        printf("\n");
+    }
 }
 
 // Demo

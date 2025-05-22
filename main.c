@@ -11,8 +11,10 @@ int main(){
 
     fillPriorityArray();
     init_tasks();
-    sleep(1);
+    usleep(50000);
     stop = 1;
     deinit();
+
+    // run_sched_fifo_test();
 
 }

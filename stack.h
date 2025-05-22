@@ -22,5 +22,6 @@ int pop(IntStack *stack);
 int peek(IntStack *stack);
 bool isEmpty(IntStack *stack);
 void freeStack(IntStack *stack);
+void printstack(IntStack *stack);
 
 #endif //STACK_H

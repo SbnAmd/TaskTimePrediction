@@ -42,3 +42,4 @@ struct task_stat
 typedef void (*Func)();
 void pin_thread_to_core(int core_id);
 long perf_event_open(struct perf_event_attr *hw_event, pid_t pid, int cpu, int group_fd, unsigned long flags);
+void init_perf_events(int task_id, struct task_stat* task_stat_arr);

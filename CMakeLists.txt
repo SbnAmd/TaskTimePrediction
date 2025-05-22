@@ -19,6 +19,10 @@ add_executable(ExecutionPrediction
         def.h
         stack.c
         stack.h
+        barrier.c
+        barrier.h
+        test/test_sched_fifo.c
+        test/test_sched_fifo.h
 )
 set(CMAKE_C_FLAGS "-O0" CACHE STRING "C flags" FORCE)
 set(CMAKE_CXX_FLAGS "-O0" CACHE STRING "C++ flags" FORCE)
