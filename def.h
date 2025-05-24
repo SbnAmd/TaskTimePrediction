@@ -27,7 +27,7 @@
 #define CORE            5
 #define INSTANCE_LIMIT  2000
 
-// #define RECORD_PERF_COUNT
+#define RECORD_PERF_COUNT
 
 
 #endif //DEF_H

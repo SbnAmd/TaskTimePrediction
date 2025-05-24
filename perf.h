@@ -1,18 +1,12 @@
 #pragma once
 #include "def.h"
+#include "stack.h"
 
 enum STATUS {
     RUN,
     BLOCK,
     SUSPEND
 };
-
-// enum IDX{
-//     IDX_INSTRUCTIONS,
-//     IDX_CPU_CYCLES,
-//     IDX_CACHE_MISSES
-// };
-
 
 struct perf_param{
     long cycles;
@@ -42,4 +36,11 @@ struct task_stat
 typedef void (*Func)();
 void pin_thread_to_core(int core_id);
 long perf_event_open(struct perf_event_attr *hw_event, pid_t pid, int cpu, int group_fd, unsigned long flags);
-void init_perf_events(int task_id, struct task_stat* task_stat_arr);
+void init_perf_events(int task_id);
+void deinit_pe(int task_id);
+void handle_perf_event_error(const char* action, int task_id);
+void reset_perf_counter(int task_id);
+void enable_perf_counter(int task_id);
+void disable_perf_counter(int task_id);
+void read_perf_counter(int task_id);
+void append_perf_counter(int task_id);

@@ -8,6 +8,7 @@
 #include "perf_wrapper.h"
 #include "barrier.h"
 #include "perf.h"
+#include "utils.h"
 #define MAX_PRIORITY 90
 #define MIN_PRIORITY 30
 

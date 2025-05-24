@@ -1,6 +1,9 @@
 #include "perf.h"
 
 extern uint64_t event_configs[NUM_EVENTS];
+extern IntStack preemption_stack;
+extern struct task_stat task_stat_arr[NUM_THREADS];
+extern int event_open[NUM_THREADS];
 
 void pin_thread_to_core(int core_id) {
     cpu_set_t cpuset;
@@ -19,7 +22,8 @@ long perf_event_open(struct perf_event_attr *hw_event, pid_t pid, int cpu, int g
     return syscall(__NR_perf_event_open, hw_event, pid, cpu, group_fd, flags);
 }
 
-void init_perf_events(int task_id, struct task_stat* task_stat_arr) {
+
+void init_perf_events(int task_id) {
 
     struct perf_event_attr *pe = task_stat_arr[task_id].pe;
     int *fds = task_stat_arr[task_id].fds;
@@ -42,8 +46,67 @@ void init_perf_events(int task_id, struct task_stat* task_stat_arr) {
     }
 }
 
-void deinit_pe(int task_id, struct task_stat* task_stat_arr) {
+void deinit_pe(int task_id) {
     for (int i = 0; i < NUM_EVENTS; ++i)
         close(task_stat_arr[task_id].fds[i]);
+}
+
+void handle_perf_event_error(const char* action, int task_id) {
+    perror(action);
+//    print_fds(task_id);
+    printstack(&preemption_stack);
+    exit(1);
+}
+
+void reset_perf_counter(int task_id) {
+    if (event_open[task_id] == 0) {
+        if (ioctl(task_stat_arr[task_id].fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) == -1) {
+            handle_perf_event_error("Reset failed", task_id);
+        }
+    }
+}
+
+void enable_perf_counter(int task_id) {
+    if (event_open[task_id] == 0) {
+        if (ioctl(task_stat_arr[task_id].fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) == -1) {
+            handle_perf_event_error("Enable failed", task_id);
+        }
+        task_stat_arr[task_id].perf_open = 1;
+        event_open[task_id] = 1;
+    }
+}
+
+void disable_perf_counter(int task_id) {
+    if (event_open[task_id] == 1) {
+        if (ioctl(task_stat_arr[task_id].fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) == -1) {
+            handle_perf_event_error("Disable failed", task_id);
+        }
+        task_stat_arr[task_id].perf_open = 0;
+        event_open[task_id] = 0;
+    }
+}
+
+void read_perf_counter(int task_id) {
+    long long buffer[NUM_EVENTS];
+    for (int i = 0; i < NUM_EVENTS; ++i) {
+        if (read(task_stat_arr[task_id].fds[i], &buffer[i], sizeof(long long)) == -1) {
+            perror("Read failed");
+        }
+    }
+    memcpy(&task_stat_arr[task_id].perf_parameters, buffer, sizeof(struct perf_param));
+}
+
+void append_perf_counter(int task_id) {
+    long long buffer[NUM_EVENTS] = {0};
+    long long buffer1[NUM_EVENTS] = {0};
+
+    memcpy(buffer1, &task_stat_arr[task_id].perf_parameters, sizeof(struct perf_param));
+    for (int i = 0; i < NUM_EVENTS; ++i) {
+        if (read(task_stat_arr[task_id].fds[i], &buffer[i], sizeof(long long)) == -1) {
+            perror("Read failed");
+        }
+        buffer[i] += buffer1[i];
+    }
+    memcpy(&task_stat_arr[task_id].perf_parameters, buffer, sizeof(struct perf_param));
 }
 

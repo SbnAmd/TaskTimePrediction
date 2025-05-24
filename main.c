@@ -7,11 +7,13 @@
 
 int main(){
 
+    set_current_thread_sched_fifo(99);
+
     printf("Starting the threads setup ...\n");
 
     fillPriorityArray();
     init_tasks();
-    usleep(50000);
+    sleep(2);
     stop = 1;
     deinit();
 

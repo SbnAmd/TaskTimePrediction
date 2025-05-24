@@ -22,10 +22,6 @@ void fillPriorityArray() {
 }
 
 void init_tasks(){
-    cpu_set_t cpuset;
-
-    struct sched_param schedparam;
-    int ret;
 
     pin_thread_to_core(CORE);
     usleep(100000);
@@ -33,59 +29,13 @@ void init_tasks(){
     initStack(&preemption_stack);
     barrier_init(&barrier, NUM_THREADS);
 
-
-    CPU_ZERO(&cpuset);
-    CPU_SET(CORE, &cpuset); // Bind thread i to CPU i (0-indexed)
-
-
     for (int i = 0; i < NUM_THREADS; i++) {
-        pthread_attr_t attr;
         thread_ids[i] = i;
 
-        /* Init scheduling attr */
-        ret = pthread_attr_init(&attr);
-        if (ret != 0) {
-            perror("pthread_attr_init");
-            exit(EXIT_FAILURE);
-        }
-
-        // Set the scheduling policy to FIFO
-        pthread_attr_setinheritsched(&attr, PTHREAD_EXPLICIT_SCHED);
-        ret = pthread_attr_setschedpolicy(&attr, SCHED_FIFO);
-        if (ret != 0) {
-            perror("pthread_attr_setschedpolicy");
-            exit(EXIT_FAILURE);
-        }
-
-        // Set the priority (important for FIFO scheduling)
-        schedparam.sched_priority = priority_array[i];
-        ret = pthread_attr_setschedparam(&attr, &schedparam);
-        if (ret != 0) {
-            perror("pthread_attr_setschedparam");
-            exit(EXIT_FAILURE);
-        }
-
-        // Create the thread
-        ret = pthread_create(&threads[i], &attr, perf_wrapper, &thread_ids[i]);
-        if (ret != 0) {
-            perror("pthread_create");
-            exit(EXIT_FAILURE);
-        }
-
-        // Set CPU affinity for each thread
-        ret = pthread_setaffinity_np(threads[i], sizeof(cpu_set_t), &cpuset);
-        if (ret != 0) {
-            perror("pthread_setaffinity_np");
-            // Don't exit, but print a warning.  Affinity setting can fail if the CPU
-            // doesn't exist.  The program can still run, but without the desired affinity.
-            fprintf(stderr, "Warning: Could not set CPU affinity for thread %d\n", i);
-        }
-        pthread_attr_destroy(&attr);
+        create_thread(&threads[i], perf_wrapper, &thread_ids[i],  priority_array[i], CORE);
         printf("Task[%d] with priority %d created\n", i, priority_array[i]);
         usleep(1000);
     }
-
-
 }
 
 #ifdef SCHEDULER
