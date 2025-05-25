@@ -25,6 +25,17 @@ add_executable(ExecutionPrediction
         test/test_sched_fifo.h
         utils.c
         utils.h
+        mibench/mibench.h
+        mibench/mibench.c
+        mibench/automotive/basicmath/basicmath.h
+        mibench/automotive/bitcount/bitcnts.h
+        mibench/automotive/qsort/qsort.h
+        mibench/automotive/susan/susan.h
+        mibench/consumer/jpeg/jpeg-6a/jpeg.h
+        mibench/consumer/lame/lame3.70/main.h
+        mibench/consumer/mad/mad-0.14.2b/madplay.h
+        mibench/consumer/tiff-v3.5.4/tools/tiff.h
+        mibench/consumer/typeset/lout-3.24/lout.h
 )
 set(CMAKE_C_FLAGS "-O0" CACHE STRING "C flags" FORCE)
 set(CMAKE_CXX_FLAGS "-O0" CACHE STRING "C++ flags" FORCE)
