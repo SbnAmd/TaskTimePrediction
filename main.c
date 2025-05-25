@@ -18,5 +18,6 @@ int main(){
     deinit();
 
     // run_sched_fifo_test();
+    print_perf_events();
 
 }

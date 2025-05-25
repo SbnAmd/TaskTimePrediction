@@ -10,6 +10,7 @@ int event_open[NUM_THREADS] = {0};
 extern Func task_array[NUM_THREADS];
 extern int  stop;
 extern barrier_t barrier;
+
 uint64_t event_configs[NUM_EVENTS] = {
     PERF_COUNT_HW_CPU_CYCLES,
     PERF_COUNT_HW_INSTRUCTIONS,
@@ -34,9 +35,13 @@ int check_status(int task_id) {
     int old_task_id = isEmpty(&preemption_stack) ? -1 : peek(&preemption_stack);
 
     if (old_task_id != -1) {
-        printf("Preempting task[%d] with old task[%d]\n", task_id, old_task_id);
+        // printf("Preempting task[%d] with old task[%d]\n", task_id, old_task_id);
         task_stat_arr[old_task_id].state = BLOCK;
         task_stat_arr[old_task_id].preemption += 1;
+#ifdef RECORD_PERF_COUNT
+        disable_perf_counter(old_task_id);
+        append_perf_counter(old_task_id);
+#endif
     }
 
     task_stat_arr[task_id].state = RUN;
@@ -78,7 +83,7 @@ void return_status(int task_id, int old_task_id) {
     task_stat_arr[task_id].execution_times[task_stat_arr[task_id].instance] = get_time_diff(task_stat_arr[task_id].start_time, task_stat_arr[task_id].end_time);
     task_stat_arr[task_id].instance += 1;
     clock_gettime(CLOCK_MONOTONIC, &end_time);
-    printf("Task[%d] inst %ld done at point %ld\n", task_id, task_stat_arr[task_id].instance, get_time_diff(g_start_time, end_time));
+    // printf("Task[%d] inst %ld done at point %ld\n", task_id, task_stat_arr[task_id].instance, get_time_diff(g_start_time, end_time));
 }
 
 void init_task_status(int task_id) {
@@ -99,6 +104,7 @@ void* perf_wrapper(void* arg) {
     int task_id = *((int*)arg);
     int old_task_id;
 
+    srand(time(NULL));
     barrier_wait(&barrier);
     usleep(10000);
 
@@ -117,11 +123,12 @@ void* perf_wrapper(void* arg) {
         clock_gettime(CLOCK_MONOTONIC, &task_stat_arr[task_id].end_time);
         return_status(task_id, old_task_id);
 
-        usleep(1000);
+        usleep(10000);
+        // usleep((rand())%500);
     }
 
 #ifdef RECORD_PERF_COUNT
-    printf("Task[%d] executed %ld times, preempted %d times\n", task_id, task_stat_arr[task_id].instance, task_stat_arr[task_id].preemption);
+    // printf("Task[%d] executed %ld times, preempted %d times\n", task_id, task_stat_arr[task_id].instance, task_stat_arr[task_id].preemption);
     deinit_pe(task_id);
 #endif
 

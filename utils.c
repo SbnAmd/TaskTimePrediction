@@ -4,6 +4,7 @@
 
 #include "utils.h"
 
+extern struct task_stat task_stat_arr[NUM_THREADS];
 
 void set_current_thread_sched_fifo(int priority) {
     pthread_attr_t attr;
@@ -84,4 +85,18 @@ void create_thread(pthread_t *thread, void *(*start_routine)(void *), void *arg,
     }
 
     pthread_attr_destroy(&attr);
+}
+
+
+void print_perf_events() {
+    for (int task_id = 0; task_id < NUM_THREADS; ++task_id) {
+        printf("Recorded Perf Events of task[%d] ----------- \n", task_id);
+        printf("\tCycles : %ld\n", task_stat_arr[task_id].perf_parameters.cycles);
+        printf("\tInstructions : %ld\n", task_stat_arr[task_id].perf_parameters.instructions);
+        printf("\tCache Misses : %ld\n", task_stat_arr[task_id].perf_parameters.cache_misses);
+        printf("\tCache References : %ld\n", task_stat_arr[task_id].perf_parameters.cache_refs);
+        printf("\tBranch Misses : %ld\n", task_stat_arr[task_id].perf_parameters.branch_misses);
+        printf("\tBranch References : %ld\n", task_stat_arr[task_id].perf_parameters.branch_refs);
+        printf("\n\n");
+    }
 }

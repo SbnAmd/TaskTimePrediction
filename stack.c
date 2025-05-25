@@ -5,7 +5,7 @@
 #include "stack.h"
 
 
-#define INITIAL_CAPACITY 1000
+#define INITIAL_CAPACITY 10000
 
 
 
