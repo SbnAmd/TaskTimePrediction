@@ -5,11 +5,11 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-
-#define INPUT_FILE_LARGE "large.wav"
-#define INPUT_FILE_SMALL "small.wav"
-#define OUTPUT_FILE_LARGE "output_large.mp3"
-#define OUTPUT_FILE_SMALL "output_small.mp3"
+#define PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/lame/"
+#define INPUT_FILE_LARGE PREFIX_PATH "large.wav"
+#define INPUT_FILE_SMALL PREFIX_PATH "small.wav"
+#define OUTPUT_FILE_LARGE PREFIX_PATH "output_large.mp3"
+#define OUTPUT_FILE_SMALL PREFIX_PATH "output_small.mp3"
 
 int _lame(int argc, char **argv);
 

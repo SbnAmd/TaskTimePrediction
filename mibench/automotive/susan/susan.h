@@ -5,15 +5,16 @@
 #ifndef SUSAN_H
 #define SUSAN_H
 
-#define INPUT_FILE_LARGE "input_large.pgm"
-#define OUTPUT_FILE_LARGE_SMOOTHING "output_large.smoothing.pgm"
-#define OUTPUT_FILE_LARGE_EDGES "output_large.edges.pgm"
-#define OUTPUT_FILE_LARGE_CORNERS "output_large.corners.pgm"
+#define PREFIX_PATH "/home/sbn/mibench/automotive/susan/"
+#define INPUT_FILE_LARGE PREFIX_PATH "input_large.pgm"
+#define OUTPUT_FILE_LARGE_SMOOTHING PREFIX_PATH "output_large.smoothing.pgm"
+#define OUTPUT_FILE_LARGE_EDGES PREFIX_PATH "output_large.edges.pgm"
+#define OUTPUT_FILE_LARGE_CORNERS PREFIX_PATH "output_large.corners.pgm"
 
-#define INPUT_FILE_SMALL "input_small.pgm"
-#define OUTPUT_FILE_SMALL_SMOOTHING "output_small.smoothing.pgm"
-#define OUTPUT_FILE_SMALL_EDGES "output_small.edges.pgm"
-#define OUTPUT_FILE_SMALL_CORNERS "output_small.corners.pgm"
+#define INPUT_FILE_SMALL PREFIX_PATH "input_small.pgm"
+#define OUTPUT_FILE_SMALL_SMOOTHING PREFIX_PATH "output_small.smoothing.pgm"
+#define OUTPUT_FILE_SMALL_EDGES PREFIX_PATH "output_small.edges.pgm"
+#define OUTPUT_FILE_SMALL_CORNERS PREFIX_PATH "output_small.corners.pgm"
 
 
 _susan(int argc,char* argv[]);

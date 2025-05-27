@@ -5,8 +5,9 @@
 #ifndef QSORT_H
 #define QSORT_H
 
-#define INPUT_FILE_LARGE "input_large.dat"
-#define INPUT_FILE_SMALL "input_small.dat"
+#define PREFIX_PATH "/home/sbn/mibench/automotive/qsort/"
+#define INPUT_FILE_LARGE PREFIX_PATH "input_large.dat"
+#define INPUT_FILE_SMALL PREFIX_PATH "input_small.dat"
 
 int __qsort_large(int argc, char *argv[]);
 int __qsort_small(int argc, char *argv[]);

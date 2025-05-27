@@ -5,12 +5,13 @@
 #ifndef JPEG_H
 #define JPEG_H
 
-#define INPUT_FILE_LARGE  "input_large.ppm"
-#define INPUT_FILE_SMALL  "input_small.ppm"
-#define OUTPUT_FILE_LARGE_ENCODE  "output_large_encode.jpeg"
-#define OUTPUT_FILE_LARGE_DECODE  "output_large_decode.ppm"
-#define OUTPUT_FILE_SMALL_ENCODE  "output_small_encode.jpeg"
-#define OUTPUT_FILE_SMALL_DECODE  "output_small_decode.ppm"
+#define PREFIX_PATH "mibench/consumer/jpeg/"
+#define INPUT_FILE_LARGE PREFIX_PATH "input_large.ppm"
+#define INPUT_FILE_SMALL PREFIX_PATH "input_small.ppm"
+#define OUTPUT_FILE_LARGE_ENCODE PREFIX_PATH "output_large_encode.jpeg"
+#define OUTPUT_FILE_LARGE_DECODE PREFIX_PATH "output_large_decode.ppm"
+#define OUTPUT_FILE_SMALL_ENCODE PREFIX_PATH "output_small_encode.jpeg"
+#define OUTPUT_FILE_SMALL_DECODE PREFIX_PATH "output_small_decode.ppm"
 
 int _cjpeg (int argc, char **argv);
 int _djpeg(int argc, char **argv);

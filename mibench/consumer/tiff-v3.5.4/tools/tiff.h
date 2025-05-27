@@ -5,26 +5,27 @@
 #ifndef TIFF_H
 #define TIFF_H
 
+#define PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/tiff-data/"
 
-#define TIFF2BW_INPUT_FILE_LARGE    "../tiff-data/large.tif"
-#define TIFF2BW_INPUT_FILE_SMALL    "../tiff-data/small.tif"
-#define TIFF2BW_OUTPUT_FILE_LARGE   "output_largebw.tif"
-#define TIFF2BW_OUTPUT_FILE_SMALL   "output_smallbw.tif"
+#define TIFF2BW_INPUT_FILE_LARGE   PREFIX_PATH "large.tif"
+#define TIFF2BW_INPUT_FILE_SMALL   PREFIX_PATH "small.tif"
+#define TIFF2BW_OUTPUT_FILE_LARGE  PREFIX_PATH "output_largebw.tif"
+#define TIFF2BW_OUTPUT_FILE_SMALL  PREFIX_PATH "output_smallbw.tif"
 
-#define TIFF2RGBA_INPUT_FILE_LARGE    "../tiff-data/large.tif"
-#define TIFF2RGBA_INPUT_FILE_SMALL    "../tiff-data/small.tif"
-#define TIFF2RGBA_OUTPUT_FILE_LARGE   "output_largergba.tif"
-#define TIFF2RGBA_OUTPUT_FILE_SMALL   "output_smallrgba.tif"
+#define TIFF2RGBA_INPUT_FILE_LARGE   PREFIX_PATH "large.tif"
+#define TIFF2RGBA_INPUT_FILE_SMALL   PREFIX_PATH "small.tif"
+#define TIFF2RGBA_OUTPUT_FILE_LARGE  PREFIX_PATH "output_largergba.tif"
+#define TIFF2RGBA_OUTPUT_FILE_SMALL  PREFIX_PATH "output_smallrgba.tif"
 
-#define TIFFDITHER_INPUT_FILE_LARGE    "../tiff-data/largebw.tif"
-#define TIFFDITHER_INPUT_FILE_SMALL    "../tiff-data/smallbw.tif"
-#define TIFFDITHER_OUTPUT_FILE_LARGE   "output_largedither.tif"
-#define TIFFDITHER_OUTPUT_FILE_SMALL   "output_smalldither.tif"
+#define TIFFDITHER_INPUT_FILE_LARGE   PREFIX_PATH "largebw.tif"
+#define TIFFDITHER_INPUT_FILE_SMALL   PREFIX_PATH "smallbw.tif"
+#define TIFFDITHER_OUTPUT_FILE_LARGE  PREFIX_PATH "output_largedither.tif"
+#define TIFFDITHER_OUTPUT_FILE_SMALL  PREFIX_PATH "output_smalldither.tif"
 
-#define TIFFMEDIAN_INPUT_FILE_LARGE    "../tiff-data/large.tif"
-#define TIFFMEDIAN_INPUT_FILE_SMALL    "../tiff-data/small.tif"
-#define TIFFMEDIAN_OUTPUT_FILE_LARGE   "output_largemedian.tif"
-#define TIFFMEDIAN_OUTPUT_FILE_SMALL   "output_smallmedian.tif"
+#define TIFFMEDIAN_INPUT_FILE_LARGE   PREFIX_PATH "large.tif"
+#define TIFFMEDIAN_INPUT_FILE_SMALL   PREFIX_PATH "small.tif"
+#define TIFFMEDIAN_OUTPUT_FILE_LARGE  PREFIX_PATH "output_largemedian.tif"
+#define TIFFMEDIAN_OUTPUT_FILE_SMALL  PREFIX_PATH "output_smallmedian.tif"
 
 int _tiff2bw(int argc, char* argv[]);
 int _tiff2rgba(int argc, char* argv[]);

@@ -5,21 +5,22 @@
 #ifndef LOUT_H
 #define LOUT_H
 
-#define LOUT_INC            "lout-3.24/include"
-#define LOUT_DATA           "lout-3.24/data"
-#define LOUT_FONT           "lout-3.24/font"
-#define LOUT_MAPS           "lout-3.24/maps"
-#define LOUT_HYPH           "lout-3.24/hyph"
-#define INPUT_LARGE         "large.lout"
-#define INPUT_SMALL         "small.lout"
+#define PREFIX_PATH         "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/typeset/"
+#define LOUT_INC           PREFIX_PATH "lout-3.24/include"
+#define LOUT_DATA          PREFIX_PATH "lout-3.24/data"
+#define LOUT_FONT          PREFIX_PATH "lout-3.24/font"
+#define LOUT_MAPS          PREFIX_PATH "lout-3.24/maps"
+#define LOUT_HYPH          PREFIX_PATH "lout-3.24/hyph"
+#define INPUT_LARGE        PREFIX_PATH "large.lout"
+#define INPUT_SMALL        PREFIX_PATH "small.lout"
 
 int _lout(int argc, char *argv[]);
 
-void lout_large() {
+void _lout_large() {
     _lout(12, (char*[]){"lout-3.24/lout", "-I", LOUT_INC, "-D", LOUT_DATA, "-F", LOUT_FONT, "-C", LOUT_MAPS, "-H", LOUT_HYPH, INPUT_LARGE});
 }
 
-void lout_small() {
+void _lout_small() {
     _lout(12, (char*[]){"lout-3.24/lout", "-I", LOUT_INC, "-D", LOUT_DATA, "-F", LOUT_FONT, "-C", LOUT_MAPS, "-H", LOUT_HYPH, INPUT_SMALL});
 }
 
