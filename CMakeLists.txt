@@ -3,6 +3,12 @@ cmake_minimum_required(VERSION 3.10)
 project(ExecutionPrediction)
 
 add_subdirectory(mibench)
+
+#include_directories(mibench/out)
+
+add_executable(ExecutionPrediction mibench/test/test.c)
+target_link_libraries(ExecutionPrediction PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/mibench/out/libmibench.a)
+
 #
 #add_executable(ExecutionPrediction
 #        perf.h

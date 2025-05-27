@@ -4,7 +4,7 @@
 
 #define PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/sha/"
 #define INPUT_LARGE PREFIX_PATH "input_large.asc"
-#define INPUT_LARGE PREFIX_PATH "input_small.asc"
+#define INPUT_SMALL PREFIX_PATH "input_small.asc"
 
 int __sha(int argc, char **argv);
 

@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "mibench.h"
+#include "../mibench.h"
 
-extern static const char* mibench_function_names[NUM_MIBENCH_FUNCTIONS];
-extern static void (*mibench_functions[NUM_MIBENCH_FUNCTIONS])();
+// extern static const char* mibench_function_names[NUM_MIBENCH_FUNCTIONS];
+// extern static void (*mibench_functions[NUM_MIBENCH_FUNCTIONS])();
 
 int main() {
 
