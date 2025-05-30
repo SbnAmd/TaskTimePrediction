@@ -45,13 +45,13 @@
 # if !defined(HAVE_UNISTD_H)
 signed long read(int, void *, unsigned long count);
 signed long lseek(int, signed long, int);
-int open(char const *, int);
+// int open(char const *, int);
 int close(int);
-
-#  define isatty(x)	((x) == STDIN_FILENO)
+#  define STDIN_FILENO	0
+// #  define isatty(x)	((x) == STDIN_FILENO)
 #  define S_ISREG(x)	1
 
-#  define STDIN_FILENO	0
+
 #  define SEEK_CUR	1
 # endif
 

@@ -4,15 +4,16 @@
  * details.  THERE IS ABSOLUTELY NO WARRANTY FOR THIS SOFTWARE.
  */
 
+#include <string.h>
 static char	ident[] = "$Header: /home/mguthaus/.cvsroot/mibench/telecomm/gsm/src/gsm_create.c,v 1.1.1.1 2000/11/06 19:54:25 mguthaus Exp $";
 
-#include	"config.h"
+#include	"../inc/config.h"
 
 #ifdef	HAS_STRING_H
 #include	<string.h>
 #else
-#	include "proto.h"
-	extern char	* memset P((char *, int, int));
+#	include "../inc/proto.h"
+	// extern char	* memset P((char *, int, int));
 #endif
 
 #ifdef	HAS_STDLIB_H
@@ -27,9 +28,9 @@ static char	ident[] = "$Header: /home/mguthaus/.cvsroot/mibench/telecomm/gsm/src
 
 #include <stdio.h>
 
-#include "gsm.h"
-#include "private.h"
-#include "proto.h"
+#include "../inc/gsm.h"
+#include "../inc/private.h"
+#include "../inc/proto.h"
 
 gsm gsm_create P0()
 {

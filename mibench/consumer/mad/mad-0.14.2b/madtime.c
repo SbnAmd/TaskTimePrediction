@@ -25,9 +25,9 @@
 
 # include "global.h"
 
-# if !defined(HAVE_MMAP)
-#  error "madtime currently requires mmap() support"
-# endif
+// # if !defined(HAVE_MMAP)
+// #  error "madtime currently requires mmap() support"
+// # endif
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -52,7 +52,7 @@
 # if !defined(O_BINARY)
 #  define O_BINARY  0
 # endif
-
+#  include <fcntl.h>
 # include "mad.h"
 
 static

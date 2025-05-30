@@ -47,7 +47,7 @@ struct gsm_state {
 #undef	SASR
 #define	SASR(x, by)	((x) >> (by))
 #endif	/* SASR */
-
+#define	SASR(x, by)	((x) >> (by))
 
 #include "proto.h"
 

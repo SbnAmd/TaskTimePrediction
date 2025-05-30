@@ -131,8 +131,11 @@ typedef long signedunit;
 /* #define bytes2units(n) (((n)+(BYTES_PER_UNIT-1)) >> (LOG_UNITSIZE-3)) */
 
 typedef unit *unitptr;
-
-
+typedef unsigned short MULTUNIT;
+void p_smul (
+MULTUNIT *prod,
+MULTUNIT *multiplicand,
+MULTUNIT multiplier);
 /*--------------------- Byte ordering stuff -------------------*/
 #ifdef HIGHFIRST
 
@@ -214,7 +217,7 @@ typedef unit *unitptr;
 
 	/* set working precision to specified number of bits. */
 #ifdef mp_setp
-void mp_setp(short nbits);
+static inline void mp_setp(short nbits){};
 #define set_precision(prec)	mp_setp(units2bits(global_precision=(prec)))
 #else
 #define set_precision(prec) (global_precision = (prec))

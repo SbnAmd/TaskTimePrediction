@@ -10,7 +10,7 @@ struct myStringStruct {
   char qstring[128];
 };
 
-int compare(const void *elem1, const void *elem2)
+int compare_small(const void *elem1, const void *elem2)
 {
   int result;
   
@@ -38,7 +38,7 @@ int __qsort_small(int argc, char *argv[]) {
     }
   }
   printf("\nSorting %d elements.\n\n",count);
-  qsort(array,count,sizeof(struct myStringStruct),compare);
+  qsort(array,count,sizeof(struct myStringStruct),compare_small);
   
   for(i=0;i<count;i++)
     printf("%s\n", array[i].qstring);

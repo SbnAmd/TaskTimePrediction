@@ -6,105 +6,105 @@
 
 struct _NODE
 {
-  int iDist;
-  int iPrev;
+  int iDist_large;
+  int iPrev_large;
 };
 typedef struct _NODE NODE;
 
 struct _QITEM
 {
-  int iNode;
-  int iDist;
-  int iPrev;
+  int iNode_large;
+  int iDist_large;
+  int iPrev_large;
   struct _QITEM *qNext;
 };
 typedef struct _QITEM QITEM;
 
-QITEM *qHead = NULL;
+QITEM *qHead_large = NULL;
 
              
              
              
-int AdjMatrix[NUM_NODES][NUM_NODES];
+int AdjMatrix_large[NUM_NODES][NUM_NODES];
 
-int g_qCount = 0;
-NODE rgnNodes[NUM_NODES];
-int ch;
-int iPrev, iNode;
-int i, iCost, iDist;
+int g_qCount_large = 0;
+NODE rgnNodes_large[NUM_NODES];
+int ch_large;
+int iPrev_large, iNode_large;
+int i_large, iCost_large, iDist_large;
 
 
-void print_path (NODE *rgnNodes, int chNode)
+void print_path_large (NODE *rgnNodes_large, int chNode)
 {
-  if (rgnNodes[chNode].iPrev != NONE)
+  if (rgnNodes_large[chNode].iPrev_large != NONE)
     {
-      print_path(rgnNodes, rgnNodes[chNode].iPrev);
+      print_path_large(rgnNodes_large, rgnNodes_large[chNode].iPrev_large);
     }
   printf (" %d", chNode);
   fflush(stdout);
 }
 
 
-void enqueue (int iNode, int iDist, int iPrev)
+void enqueue_large (int iNode_large, int iDist_large, int iPrev_large)
 {
   QITEM *qNew = (QITEM *) malloc(sizeof(QITEM));
-  QITEM *qLast = qHead;
+  QITEM *qLast = qHead_large;
   
   if (!qNew) 
     {
       fprintf(stderr, "Out of memory.\n");
       exit(1);
     }
-  qNew->iNode = iNode;
-  qNew->iDist = iDist;
-  qNew->iPrev = iPrev;
+  qNew->iNode_large = iNode_large;
+  qNew->iDist_large = iDist_large;
+  qNew->iPrev_large = iPrev_large;
   qNew->qNext = NULL;
   
   if (!qLast) 
     {
-      qHead = qNew;
+      qHead_large = qNew;
     }
   else
     {
       while (qLast->qNext) qLast = qLast->qNext;
       qLast->qNext = qNew;
     }
-  g_qCount++;
-  //               ASSERT(g_qCount);
+  g_qCount_large++;
+  //               ASSERT(g_qCount_large);
 }
 
 
-void dequeue (int *piNode, int *piDist, int *piPrev)
+void dequeue_large (int *piNode, int *piDist, int *piPrev)
 {
-  QITEM *qKill = qHead;
+  QITEM *qKill = qHead_large;
   
-  if (qHead)
+  if (qHead_large)
     {
-      //                 ASSERT(g_qCount);
-      *piNode = qHead->iNode;
-      *piDist = qHead->iDist;
-      *piPrev = qHead->iPrev;
-      qHead = qHead->qNext;
+      //                 ASSERT(g_qCount_large);
+      *piNode = qHead_large->iNode_large;
+      *piDist = qHead_large->iDist_large;
+      *piPrev = qHead_large->iPrev_large;
+      qHead_large = qHead_large->qNext;
       free(qKill);
-      g_qCount--;
+      g_qCount_large--;
     }
 }
 
 
-int qcount (void)
+int qcount_large (void)
 {
-  return(g_qCount);
+  return(g_qCount_large);
 }
 
-int dijkstra(int chStart, int chEnd) 
+int dijkstra_l(int chStart, int chEnd)
 {
   
 
   
-  for (ch = 0; ch < NUM_NODES; ch++)
+  for (ch_large = 0; ch_large < NUM_NODES; ch_large++)
     {
-      rgnNodes[ch].iDist = NONE;
-      rgnNodes[ch].iPrev = NONE;
+      rgnNodes_large[ch_large].iDist_large = NONE;
+      rgnNodes_large[ch_large].iPrev_large = NONE;
     }
 
   if (chStart == chEnd) 
@@ -115,32 +115,32 @@ int dijkstra(int chStart, int chEnd)
     }
   else
     {
-      rgnNodes[chStart].iDist = 0;
-      rgnNodes[chStart].iPrev = NONE;
+      rgnNodes_large[chStart].iDist_large = 0;
+      rgnNodes_large[chStart].iPrev_large = NONE;
       
-      enqueue (chStart, 0, NONE);
+      enqueue_large (chStart, 0, NONE);
       
-     while (qcount() > 0)
+     while (qcount_large() > 0)
 	{
-	  dequeue (&iNode, &iDist, &iPrev);
-	  for (i = 0; i < NUM_NODES; i++)
+	  dequeue_large (&iNode_large, &iDist_large, &iPrev_large);
+	  for (i_large = 0; i_large < NUM_NODES; i_large++)
 	    {
-	      if ((iCost = AdjMatrix[iNode][i]) != NONE)
+	      if ((iCost_large = AdjMatrix_large[iNode_large][i_large]) != NONE)
 		{
-		  if ((NONE == rgnNodes[i].iDist) || 
-		      (rgnNodes[i].iDist > (iCost + iDist)))
+		  if ((NONE == rgnNodes_large[i_large].iDist_large) ||
+		      (rgnNodes_large[i_large].iDist_large > (iCost_large + iDist_large)))
 		    {
-		      rgnNodes[i].iDist = iDist + iCost;
-		      rgnNodes[i].iPrev = iNode;
-		      enqueue (i, iDist + iCost, iNode);
+		      rgnNodes_large[i_large].iDist_large = iDist_large + iCost_large;
+		      rgnNodes_large[i_large].iPrev_large = iNode_large;
+		      enqueue_large (i_large, iDist_large + iCost_large, iNode_large);
 		    }
 		}
 	    }
 	}
       #ifdef PRINT_LOG
-      printf("Shortest path is %d in cost. ", rgnNodes[chEnd].iDist);
+      printf("Shortest path is %d in cost. ", rgnNodes_large[chEnd].iDist_large);
       printf("Path is: ");
-      print_path(rgnNodes, chEnd);
+      print_path_large(rgnNodes_large, chEnd);
       printf("\n");
       #endif
     }
@@ -153,7 +153,7 @@ int __dijkstra_large(int argc, char *argv[]) {
   
   #ifdef PRINT_LOG
   if (argc<2) {
-    fprintf(stderr, "Usage: dijkstra <filename>\n");
+    fprintf(stderr, "Usage: dijkstra_l <filename>\n");
     fprintf(stderr, "Only supports matrix size is #define'd.\n");
   }
   #endif
@@ -166,14 +166,14 @@ int __dijkstra_large(int argc, char *argv[]) {
     for (j=0;j<NUM_NODES;j++) {
       /* make it more sparce */
       fscanf(fp,"%d",&k);
-			AdjMatrix[i][j]= k;
+			AdjMatrix_large[i][j]= k;
     }
   }
 
   /* finds 10 shortest paths between nodes */
   for (i=0,j=NUM_NODES/2;i<100;i++,j++) {
 			j=j%NUM_NODES;
-      dijkstra(i,j);
+      dijkstra_l(i,j);
   }
   exit(0);
   

@@ -34,10 +34,11 @@
 # elif defined(HAVE_MACHINE_SOUNDCARD_H)
 #  include <machine/soundcard.h>
 # else
-#  error "need <sys/soundcard.h> or <machine/soundcard.h>"
+// #  error "need <sys/soundcard.h> or <machine/soundcard.h>"
 # endif
 
 # include <errno.h>
+#include <linux/soundcard.h>
 
 # include "mad.h"
 # include "audio.h"

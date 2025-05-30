@@ -179,7 +179,7 @@ processCompressOptions(char* opt)
 }
 
 // int main(int argc, char* argv[])
-int _tiffdithre(int argc, char* argv[])
+int _tiffdither(int argc, char* argv[])
 {
 	TIFF *in, *out;
 	uint16 samplesperpixel, bitspersample = 1, shortv;

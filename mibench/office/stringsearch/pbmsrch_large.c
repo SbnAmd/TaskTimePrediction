@@ -25,7 +25,7 @@ static char *findme;
 **  Call this with the string to locate to initialize the table
 */
 
-void init_search(const char *string)
+void init_search_l(const char *string)
 {
       size_t i;
 
@@ -41,7 +41,7 @@ void init_search(const char *string)
 **  Call this with a buffer to search
 */
 
-char *strsearch(const char *string)
+char *strsearch_l(const char *string)
 {
       register size_t shift;
       register size_t pos = len - 1;
@@ -2744,8 +2744,8 @@ NULL};
 
       for (i = 0; find_strings[i]; i++)
       {
-            init_search(find_strings[i]);
-            here = strsearch(search_strings[i]);
+            init_search_l(find_strings[i]);
+            here = strsearch_l(search_strings[i]);
             printf("\"%s\" is%s in \"%s\"", find_strings[i],
                   here ? "" : " not", search_strings[i]);
             if (here)

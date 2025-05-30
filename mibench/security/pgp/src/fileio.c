@@ -30,6 +30,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #ifdef UNIX
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -76,7 +79,8 @@ char *ck_dup_output(char *, boolean, boolean);
 #define W_OK	2
 #define R_OK	4
 #endif				/* !F_OK */
-
+static char const DIRSEPS[] = "/";
+#define MULTIPLE_DOTS
 /*
  * DIRSEPS is a string of possible directory-separation characters
  * The first one is the preferred one, which goes in between
@@ -113,7 +117,7 @@ static char const DIRSEPS[] = ":";
 
 #else
 /* #error is not portable, this has the same effect */
-#include "Unknown OS"
+// #include "Unknown OS"
 #endif
 
 #ifdef __PUREC__
@@ -1154,7 +1158,7 @@ void setoutdir(char *filename)
 /*
  * return a unique temporary file name
  */
-char *tempfile(int flags)
+char *tempfile_pgp(int flags)
 {
     int i, j;
     int num;

@@ -4,9 +4,9 @@
 
 #ifndef PGP_TEST_H
 #define PGP_TEST_H
-#define PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/pgp/tests/"
-#define INPUT_FILE PREFIX_PATH "testin.txt"
-#define OUTPUT_FILE PREFIX_PATH "testout.txt.asc"
+#define PGP_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/pgp/tests/"
+#define PGP_INPUT_FILE PGP_PREFIX_PATH "testin.txt"
+#define PGP_OUTPUT_FILE PGP_PREFIX_PATH "testout.txt.asc"
 
 int __pgp(int argc, char *argv[]);
 
@@ -18,7 +18,7 @@ void _pgp() {
         "this is a test",
         "-u",
         "taustin@eecs.umich.edu",
-        "testin.txt",
+        PGP_INPUT_FILE,
         "austin@umich.edu"
     });
 
@@ -28,7 +28,7 @@ void _pgp() {
         "this is a test",
         "-u",
         "taustin@eecs.umich.edu",
-        "testout.txt.asc"});
+        PGP_OUTPUT_FILE});
 }
 
 #endif //PGP_TEST_H

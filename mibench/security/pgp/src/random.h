@@ -1,6 +1,6 @@
 #include "usuals.h"
 #include "idea.h"  /* Declaration of IdeaCfbContext */
-
+#include <conio.h>
 int cryptRandOpen(struct IdeaCfbContext *);
 byte cryptRandByte(void);
 void cryptRandInit(struct IdeaCfbContext *);

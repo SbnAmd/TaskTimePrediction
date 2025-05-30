@@ -211,7 +211,7 @@ boolean mp_rotate_left(register unitptr r1,register boolean carry)
 	return(mcarry);	/* return the final carry flag bit */
 }	/* mp_rotate_left */
 
-void p_setp(short nbits){} 
+// void p_setp(short nbits){}
 
 /************** end of primitives that should be in assembly *************/
 

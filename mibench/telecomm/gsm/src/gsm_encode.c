@@ -6,9 +6,9 @@
 
 /* $Header: /home/mguthaus/.cvsroot/mibench/telecomm/gsm/src/gsm_encode.c,v 1.1.1.1 2000/11/06 19:54:26 mguthaus Exp $ */
 
-#include "private.h"
-#include "gsm.h"
-#include "proto.h"
+#include "../inc/private.h"
+#include "../inc/gsm.h"
+#include "../inc/proto.h"
 
 void gsm_encode P3((s, source, c), gsm s, gsm_signal * source, gsm_byte * c)
 {

@@ -4,48 +4,48 @@
 
 #ifndef RIJNDAEL_H
 #define RIJNDAEL_H
-#define PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/rijndael/"
-#define INPUT_LARGE_ASC PREFIX_PATH "input_large.asc"
-#define OUTPUT_LARGE_ENC PREFIX_PATH "output_large.enc"
-#define OUTPUT_LARGE_DEC PREFIX_PATH "output_large.dec"
+#define RIJNDAEL_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/rijndael/"
+#define RIJNDAEL_INPUT_LARGE_ASC RIJNDAEL_PREFIX_PATH "input_large.asc"
+#define RIJNDAEL_OUTPUT_LARGE_ENC RIJNDAEL_PREFIX_PATH "output_large.enc"
+#define RIJNDAEL_OUTPUT_LARGE_DEC RIJNDAEL_PREFIX_PATH "output_large.dec"
 
-#define INPUT_SMALL_ASC PREFIX_PATH "input_small.asc"
-#define OUTPUT_SMALL_ENC PREFIX_PATH "output_small.enc"
-#define OUTPUT_SMALL_DEC PREFIX_PATH "output_small.dec"
+#define RIJNDAEL_INPUT_SMALL_ASC RIJNDAEL_PREFIX_PATH "input_small.asc"
+#define RIJNDAEL_OUTPUT_SMALL_ENC RIJNDAEL_PREFIX_PATH "output_small.enc"
+#define RIJNDAEL_OUTPUT_SMALL_DEC RIJNDAEL_PREFIX_PATH "output_small.dec"
 
 int __rijndael(int argc, char *argv[]);
 
-void _rijndael_large() {
+static inline void _rijndael_large() {
 
     __rijndael(5, (char *[]) {
         "rijndael",
-        INPUT_LARGE_ASC,
-        OUTPUT_LARGE_ENC,
+        RIJNDAEL_INPUT_LARGE_ASC,
+        RIJNDAEL_OUTPUT_LARGE_ENC,
         "e",
         "1234567890abcdeffedcba09876543211234567890abcdeffedcba0987654321"
     });
     __rijndael(5, (char *[]) {
         "rijndael",
-        OUTPUT_LARGE_ENC,
-        OUTPUT_LARGE_DEC,
+        RIJNDAEL_OUTPUT_LARGE_ENC,
+        RIJNDAEL_OUTPUT_LARGE_DEC,
         "d",
         "1234567890abcdeffedcba09876543211234567890abcdeffedcba0987654321"
     });
 }
 
-void _rijndael_small() {
+static inline void _rijndael_small() {
 
     __rijndael(5, (char *[]) {
         "rijndael",
-        INPUT_SMALL_ASC,
-        OUTPUT_SMALL_ENC,
+        RIJNDAEL_INPUT_SMALL_ASC,
+        RIJNDAEL_OUTPUT_SMALL_ENC,
         "e",
         "1234567890abcdeffedcba09876543211234567890abcdeffedcba0987654321"
     });
     __rijndael(5, (char *[]) {
         "rijndael",
-        OUTPUT_SMALL_ENC,
-        OUTPUT_SMALL_DEC,
+        RIJNDAEL_OUTPUT_SMALL_ENC,
+        RIJNDAEL_OUTPUT_SMALL_DEC,
         "d",
         "1234567890abcdeffedcba09876543211234567890abcdeffedcba0987654321"
     });

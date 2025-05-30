@@ -5,29 +5,7 @@
 #ifndef MIBENCH_H
 #define MIBENCH_H
 // #define PREFIX_PATH  "/home/sbn/Work/Paper/perf_counter_exploit/mibench/"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/automotive/basicmath/basicmath.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/automotive/bitcount/bitcnts.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/automotive/qsort/qsort.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/automotive/susan/susan.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/jpeg/jpeg-6a/jpeg.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/lame/lame3.70/main.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/mad/mad-0.14.2b/madplay.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/tiff-v3.5.4/tools/tiff.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/typeset/lout-3.24/lout.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/network/dijkstra/dijkstra.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/network/patricia/patricia_test.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/office/ghostscript/src/gs.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/office/ispell/ispell_test.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/office/rsynth/say_test.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/office/stringsearch/stringsearch.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/blowfish/bf.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/pgp/src/pgp_test.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/rijndael/rijndael.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/sha/sha_test.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/telecomm/adpcm/src/rawaudio.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/telecomm/CRC32/crc_test.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/telecomm/FFT/fft.h"
-#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/telecomm/gsm/src/gsm_test.h"
+
 
 #define NUM_MIBENCH_FUNCTIONS 51
 
@@ -38,8 +16,8 @@ void basicmath_small();
 void bitcount_large();
 void bitcount_small();
 
-void QSort_large();
-void QSort_small();
+void qsort_large();
+void qsort_small();
 
 void susan_large();
 void susan_small();
@@ -190,8 +168,8 @@ static void (*mibench_functions[])() = {
     basicmath_small,
     bitcount_large,
     bitcount_small,
-    QSort_large,
-    QSort_small,
+    qsort_large,
+    qsort_small,
     susan_large,
     susan_small,
 
@@ -220,8 +198,8 @@ static void (*mibench_functions[])() = {
     patricia_small,
 
     /* Office */
-    gs_large,
-    gs_small,
+    // gs_large,
+    // gs_small,
     ispell_large,
     ispell_small,
     say_large,

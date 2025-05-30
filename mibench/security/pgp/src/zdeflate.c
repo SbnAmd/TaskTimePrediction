@@ -617,7 +617,7 @@ ulg deflate()
  * evaluation for matches: a match is finally adopted only if there is
  * no better match at the next window position.
  */
-ulg deflate()
+ulg deflate_pgp()
 {
     IPos hash_head;          /* head of hash chain */
     IPos prev_match;         /* previous match */

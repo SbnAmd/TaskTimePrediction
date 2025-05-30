@@ -6,9 +6,9 @@
 
 /* $Header: /home/mguthaus/.cvsroot/mibench/telecomm/gsm/src/gsm_destroy.c,v 1.1.1.1 2000/11/06 19:54:25 mguthaus Exp $ */
 
-#include "gsm.h"
-#include "config.h"
-#include "proto.h"
+#include "../inc/gsm.h"
+#include "../inc/config.h"
+#include "../inc/proto.h"
 
 #ifdef	HAS_STDLIB_H
 #	include	<stdlib.h>

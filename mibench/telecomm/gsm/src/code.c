@@ -12,13 +12,13 @@
 #ifdef	HAS_STDLIB_H
 #include	<stdlib.h>
 #else
-#	include "proto.h"
+#	include "../inc/proto.h"
 	extern char	* memcpy P((char *, char *, int));
 #endif
 
-#include	"private.h"
-#include	"gsm.h"
-#include	"proto.h"
+#include	"../inc/private.h"
+#include	"../inc/gsm.h"
+#include	"../inc/proto.h"
 
 /* 
  *  4.2 FIXED POINT IMPLEMENTATION OF THE RPE-LTP CODER 

@@ -7,9 +7,7 @@
 #include <sys/types.h>
 #include <sys/time.h>
 
-gettimeofday (tp, tzp)
-     struct timeval *tp;
-     struct timezone *tzp;
+void gettimeofday (struct timeval* tp, struct timezone *tzp)
 {
   extern long time ();
 

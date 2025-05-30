@@ -6,7 +6,7 @@
 
 /* $Header: /home/mguthaus/.cvsroot/mibench/telecomm/gsm/src/toast_audio.c,v 1.1.1.1 2000/11/06 19:54:26 mguthaus Exp $ */
 
-#include	"toast.h"
+#include	"../inc/toast.h"
 
 /*  toast_audio -- functions to manipulate SunOS audio files.
  *

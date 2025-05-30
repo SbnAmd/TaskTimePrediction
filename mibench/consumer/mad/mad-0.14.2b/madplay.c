@@ -46,7 +46,7 @@
 # include <math.h>
 #include "madplay.h"
 # include "version.h"
-# include "mad.h"
+# include "libmad/mad.h"
 # include "audio.h"
 # include "player.h"
 
@@ -587,7 +587,7 @@ void get_options(int argc, char *argv[], struct player *player)
  * DESCRIPTION:	program entry point
  */
 // int main(int argc, char *argv[])               //Function name changed to avoid conflict with main()
-int _mad(int argc, char *argv[])
+void _mad(int argc, char *argv[])
 {
   struct player player;
   int result = 0;
@@ -652,7 +652,7 @@ int _mad(int argc, char *argv[])
 
   player_finish(&player);
 
-  return result;
+  // return result;
 }
 
 

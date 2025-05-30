@@ -2,12 +2,15 @@ cmake_minimum_required(VERSION 3.10)
 
 project(ExecutionPrediction)
 
-add_subdirectory(mibench)
+#add_subdirectory(mibench)
 
-#include_directories(mibench/out)
+include_directories(PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc/
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/mibench/automotive/bitcount>
+)
 
 add_executable(ExecutionPrediction mibench/test/test.c)
-target_link_libraries(ExecutionPrediction PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/mibench/out/libmibench.a)
+target_link_libraries(ExecutionPrediction PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/lib/libmibench.a m pthread audio md crypto ncurses)
+
 
 #
 #add_executable(ExecutionPrediction

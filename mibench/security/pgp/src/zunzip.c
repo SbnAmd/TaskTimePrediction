@@ -114,7 +114,7 @@ int unzip( FILE *inFile, FILE *outFile )        /* return PK-type error code
 	csize = ucsize = 1000000000L;	/* Make sure we can read in anything */
 #endif
 	if (status == 0)
-		status = inflate();	/* Ftoomschk! */
+		status = inflate_sec();	/* Ftoomschk! */
 
 	/* Flush output buffer before returning */
 	if (status == 0 && FlushOutput())

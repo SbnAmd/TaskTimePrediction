@@ -6,7 +6,7 @@
 
 /* $Header: /home/mguthaus/.cvsroot/mibench/telecomm/gsm/src/debug.c,v 1.1.1.1 2000/11/06 19:54:25 mguthaus Exp $ */
 
-#include "private.h"
+#include "../inc/private.h"
 
 #ifndef	NDEBUG
 
@@ -16,7 +16,7 @@
  */
 
 #include <stdio.h>
-#include "proto.h"
+#include "../inc/proto.h"
 
 void gsm_debug_words P4( (name, from, to, ptr), 
 	char 	      * name,

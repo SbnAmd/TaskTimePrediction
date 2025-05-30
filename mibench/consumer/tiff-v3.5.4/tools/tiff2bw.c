@@ -367,7 +367,7 @@ cpTags(TIFF* in, TIFF* out)
 }
 #undef NTAGS
 
-char* stuff[] = {
+char* tiff2bw_stuff[] = {
 "usage: tiff2bw [options] input.tif output.tif",
 "where options are:",
 " -R %		use #% from red channel",
@@ -397,8 +397,8 @@ usage(void)
 	int i;
 
 	setbuf(stderr, buf);
-	for (i = 0; stuff[i] != NULL; i++)
-		fprintf(stderr, "%s\n", stuff[i]);
+	for (i = 0; tiff2bw_stuff[i] != NULL; i++)
+		fprintf(stderr, "%s\n", tiff2bw_stuff[i]);
 	exit(-1);
 }
 

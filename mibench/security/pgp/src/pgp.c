@@ -112,13 +112,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <sys/types.h>
+#include <sys/stat.h>
 #ifdef UNIX
 #include <sys/types.h>
 #include <sys/stat.h>
 #endif
 
-#include "system.h"
+// #include "system.h"
 #include "mpilib.h"
 #include "random.h"
 #include "crypto.h"

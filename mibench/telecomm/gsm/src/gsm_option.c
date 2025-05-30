@@ -6,10 +6,10 @@
 
 /* $Header: /home/mguthaus/.cvsroot/mibench/telecomm/gsm/src/gsm_option.c,v 1.1.1.1 2000/11/06 19:54:26 mguthaus Exp $ */
 
-#include "private.h"
+#include "../inc/private.h"
 
-#include "gsm.h"
-#include "proto.h"
+#include "../inc/gsm.h"
+#include "../inc/proto.h"
 
 int gsm_option P3((r, opt, val), gsm r, int opt, int * val)
 {

@@ -543,7 +543,7 @@ unsigned w;             /* number of bytes to flush */
 
 
 
-int inflate_codes(tl, td, bl, bd)
+int inflate_codes_pgp(tl, td, bl, bd)
 struct huft *tl, *td;   /* literal/length and distance decoder tables */
 int bl, bd;             /* number of bits decoded by tl[] and td[] */
 /* inflate (decompress) the codes in a deflated (compressed) block.
@@ -743,7 +743,7 @@ int inflate_fixed()
 
 
   /* decompress until an end-of-block code */
-  if (inflate_codes(tl, td, bl, bd))
+  if (inflate_codes_pgp(tl, td, bl, bd))
     return 1;
 
 
@@ -890,7 +890,7 @@ int inflate_dynamic()
 
 
   /* decompress until an end-of-block code */
-  if (inflate_codes(tl, td, bl, bd))
+  if (inflate_codes_pgp(tl, td, bl, bd))
     return 1;
 
 
@@ -988,7 +988,7 @@ int inflate_entry()
 }
 
 
-int inflate()
+int inflate_sec()
 /* ignore the return code for now ... */
 {
   int status;

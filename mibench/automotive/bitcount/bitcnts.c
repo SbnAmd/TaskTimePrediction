@@ -20,7 +20,7 @@
 static int CDECL bit_shifter(long int x);
 
 // int main(int argc, char *argv[])             // Function name changed to _bitcnts to avoid conflict with main()
-int _bitcnts(int argc, char *argv[])
+void _bitcnts(int argc, char *argv[])
 {
   clock_t start, stop;
   double ct, cmin = DBL_MAX, cmax = 0;
@@ -76,7 +76,7 @@ int _bitcnts(int argc, char *argv[])
   }
   printf("\nBest  > %s\n", text[cminix]);
   printf("Worst > %s\n", text[cmaxix]);
-  return 0;
+  // return 0;
 }
 
 static int CDECL bit_shifter(long int x)

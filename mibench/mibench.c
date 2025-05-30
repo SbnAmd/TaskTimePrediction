@@ -1,5 +1,27 @@
 #include "mibench.h"
-
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/automotive/basicmath/basicmath.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/automotive/bitcount/bitcnts.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/automotive/qsort/qsort.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/automotive/susan/susan.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/jpeg/jpeg-6a/jpeg.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/lame/lame3.70/main.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/mad/mad-0.14.2b/madplay.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/tiff-v3.5.4/tools/tiff.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/typeset/lout-3.24/lout.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/network/dijkstra/dijkstra.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/network/patricia/patricia_test.h"
+// #include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/office/ghostscript/src/gs.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/office/ispell/ispell_test.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/office/rsynth/say_test.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/office/stringsearch/stringsearch.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/blowfish/bf.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/pgp/src/pgp_test.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/rijndael/rijndael.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/sha/sha_test.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/telecomm/adpcm/src/rawaudio.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/telecomm/CRC32/crc_test.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/telecomm/FFT/fft.h"
+#include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/telecomm/gsm/src/gsm_test.h"
 void basicmath_large() {
     // Implementation of the large basic math benchmark
     _basicmath_large();
@@ -34,19 +56,19 @@ void susan_small() {
 
 void bitcount_large() {
     // Implementation of the large bitcount benchmark
-    _bitcnts_large();
+    _bitcnts_large_();
 }
 
 void bitcount_small() {
     // Implementation of the small bitcount benchmark
-    _bitcnts_small();
+    _bitcnts_small_();
 }
 
-void jpeg_large() {
+void JPEG_large() {
     _jpeg_large();
 }
 
-void jpeg_small() {
+void JPEG_small() {
     _jpeg_small();
 }
 
@@ -56,6 +78,14 @@ void mad_large() {
 
 void mad_small() {
     _mad_small();
+}
+
+void lame_large() {
+    _lame_large();
+}
+
+void lame_small() {
+    _lame_small();
 }
 
 void tiff2bw_large() {
@@ -114,13 +144,13 @@ void patricia_small() {
     _patricia_small();
 }
 
-void gs_large() {
-    _gs_large();
-}
-
-void gs_small() {
-    _gs_small();
-}
+// void gs_large() {
+//     _gs_large();
+// }
+//
+// void gs_small() {
+//     _gs_small();
+// }
 
 void ispell_large() {
     _ispell_large();

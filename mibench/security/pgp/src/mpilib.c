@@ -74,6 +74,8 @@
 
 #include "mpilib.h"
 
+#include "lmul.h"
+
 #ifdef MACTC5
 #include <stdio.h>
 #include "Macutil3.h"
@@ -131,7 +133,7 @@ typedef unsigned short MULTUNIT;
 #define MULTUNITs_perunit   (UNITSIZE/MULTUNITSIZE)
 
 
-void mp_smul(MULTUNIT * prod, MULTUNIT * multiplicand, MULTUNIT multiplier);
+// void mp_smul(MULTUNIT * prod, MULTUNIT * multiplicand, MULTUNIT multiplier);
 void mp_dmul(unitptr prod, unitptr multiplicand, unitptr multiplier);
 
 #if defined(WIN32)
@@ -1226,6 +1228,70 @@ void mp_smul(MULTUNIT * prod, MULTUNIT * multiplicand, MULTUNIT multiplier)
  * buffer.  E.g. If global_precision is 10 words, prod must be
  * pointing at a 20-word buffer.
  */
+
+void p_smul (
+MULTUNIT *prod,
+MULTUNIT *multiplicand,
+MULTUNIT multiplier)
+{
+	short i=global_precision;
+	int count=i,j;
+	MULTUNIT *pp=prod, *mp=multiplicand;
+	MULTUNIT pl, ph, npl, nph, cl, ch;
+	MULTUNIT al, ah;
+
+	cl = 0;
+	ch = 0;
+
+	if (i <= 0 ) return;
+	lmul(multiplier, *multiplicand, pl, ph);
+	post_higherunit(multiplicand);
+	al = 0;
+	ah = 0;
+
+	ch = 0;
+	while(--i) {
+		lmul(multiplier, *multiplicand, npl, nph);
+		post_higherunit(multiplicand);
+		al += *prod;
+		cl = (al < *prod);
+		al += pl;
+		cl += (al < pl);
+		ah += ph;
+		ch = (ah < ph);
+		ah += cl;
+		ch += (ah < cl);
+		*prod = al;
+		post_higherunit(prod);
+		al = ah;
+		ah = ch;
+		pl = npl;
+		ph = nph;
+	}
+	al += *prod;
+	cl = (al < *prod);
+	al += pl;
+	cl += (al < pl);
+	ah += ph;
+	ch = (ah < ph);
+	ah += cl;
+	ch += (ah < cl);
+
+	*prod = al;
+	post_higherunit(prod);
+
+	*prod += ah;
+	ch += (*prod < ah);
+	post_higherunit(prod);
+
+	/*
+	*prod += ch ;
+	post_higherunit(prod);
+	*/
+
+
+}
+
 #ifndef mp_dmul
 void mp_dmul(unitptr prod, unitptr multiplicand, unitptr multiplier)
 {
@@ -1245,8 +1311,7 @@ void mp_dmul(unitptr prod, unitptr multiplicand, unitptr multiplier)
     make_lsbptr(prodp, munit_prec * 2);
     /* Multiply multiplicand by each word in multiplier, accumulating prod: */
     for (i = 0; i < munit_prec; ++i)
-	mp_smul(post_higherunit(prodp),
-		p_multiplicand, *post_higherunit(p_multiplier));
+	p_smul(post_higherunit(prodp), p_multiplicand, *post_higherunit(p_multiplier));
 }				/* mp_dmul */
 #endif				/* mp_dmul */
 

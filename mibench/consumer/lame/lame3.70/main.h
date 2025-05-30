@@ -5,20 +5,20 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#define PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/lame/"
-#define INPUT_FILE_LARGE PREFIX_PATH "large.wav"
-#define INPUT_FILE_SMALL PREFIX_PATH "small.wav"
-#define OUTPUT_FILE_LARGE PREFIX_PATH "output_large.mp3"
-#define OUTPUT_FILE_SMALL PREFIX_PATH "output_small.mp3"
+#define LAME_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/lame/"
+#define LAME_INPUT_FILE_LARGE LAME_PREFIX_PATH "large.wav"
+#define LAME_INPUT_FILE_SMALL LAME_PREFIX_PATH "small.wav"
+#define LAME_OUTPUT_FILE_LARGE LAME_PREFIX_PATH "output_large.mp3"
+#define LAME_OUTPUT_FILE_SMALL LAME_PREFIX_PATH "output_small.mp3"
 
 int _lame(int argc, char **argv);
 
-void _lame_large() {
-    _lame(3, (char *[]){"lame3.70/lame", INPUT_FILE_LARGE, OUTPUT_FILE_LARGE});
+static inline void _lame_large() {
+    _lame(3, (char *[]){"lame3.70/lame", LAME_INPUT_FILE_LARGE, LAME_OUTPUT_FILE_LARGE});
 }
 
-void _lame_small() {
-    _lame(3, (char *[]){"lame3.70/lame", INPUT_FILE_LARGE, OUTPUT_FILE_SMALL});
+static inline void _lame_small() {
+    _lame(3, (char *[]){"lame3.70/lame", LAME_INPUT_FILE_SMALL, LAME_OUTPUT_FILE_SMALL});
 }
 
 

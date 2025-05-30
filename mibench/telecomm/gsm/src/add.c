@@ -13,9 +13,9 @@
 #include	<stdio.h>
 #include	<assert.h>
 
-#include	"private.h"
-#include	"gsm.h"
-#include	"proto.h"
+#include	"../inc/private.h"
+#include	"../inc/gsm.h"
+#include	"../inc/proto.h"
 
 #define	saturate(x) 	\
 	((x) < MIN_WORD ? MIN_WORD : (x) > MAX_WORD ? MAX_WORD: (x))

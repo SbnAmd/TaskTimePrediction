@@ -5,19 +5,19 @@
 #ifndef PATRICIA_TEST_H
 #define PATRICIA_TEST_H
 
-#define PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/network/patricia/"
-#define INPUT_LARGE "large.udp"
-#define INPUT_SMALL "small.udp"
+#define PATRICIA_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/network/patricia/"
+#define PATRICIA_INPUT_LARGE PATRICIA_PREFIX_PATH "large.udp"
+#define PATRICIA_INPUT_SMALL PATRICIA_PREFIX_PATH "small.udp"
 
 int __patricia(int argc, char **argv);
 
 
-void _patricia_large() {
-    __patricia(2, (char*[]){"patricia", INPUT_LARGE});
+static inline void _patricia_large() {
+    __patricia(2, (char*[]){"patricia", PATRICIA_INPUT_LARGE});
 }
 
-void _patricia_small() {
-    __patricia(2, (char*[]){"patricia", INPUT_SMALL});
+static inline void _patricia_small() {
+    __patricia(2, (char*[]){"patricia", PATRICIA_INPUT_SMALL});
 }
 
 #endif //PATRICIA_TEST_H

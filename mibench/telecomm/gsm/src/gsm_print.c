@@ -8,10 +8,10 @@
 
 #include	<stdio.h>
 
-#include "private.h"
+#include "../inc/private.h"
 
-#include "gsm.h"
-#include "proto.h"
+#include "../inc/gsm.h"
+#include "../inc/proto.h"
 
 int gsm_print P3((f, s, c), FILE * f, gsm s, gsm_byte * c)
 {

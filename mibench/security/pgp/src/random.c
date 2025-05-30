@@ -27,6 +27,7 @@
 #include <assert.h>
 #include <signal.h>	/* For SIGINT */
 #include <time.h>
+#include <conio.h>
 
 #ifdef AMIGA      /* Includes for timer -- RKNOP */
 #include <devices/timer.h>

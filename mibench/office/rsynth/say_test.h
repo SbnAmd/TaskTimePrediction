@@ -6,21 +6,21 @@
 #define SAY_TEST_H
 #include <stddef.h>
 
-#define PREFIX_PATH         "/home/sbn/Work/Paper/perf_counter_exploit/mibench/office/rsynth/"
-#define INPUT_LARGE        PREFIX_PATH "largeinput.txt"
-#define INPUT_SMALL        PREFIX_PATH "smallinput.txt"
-#define OUTPUT_LARGE       PREFIX_PATH "large_output.au"
-#define OUTPUT_SMALL       PREFIX_PATH "small_output.au"
+#define SAY_PREFIX_PATH         "/home/sbn/Work/Paper/perf_counter_exploit/mibench/office/rsynth/"
+#define SAY_INPUT_LARGE        SAY_PREFIX_PATH "largeinput.txt"
+#define SAY_INPUT_SMALL        SAY_PREFIX_PATH "smallinput.txt"
+#define SAY_OUTPUT_LARGE       SAY_PREFIX_PATH "large_output.au"
+#define SAY_OUTPUT_SMALL       SAY_PREFIX_PATH "small_output.au"
 
 int __say(int argc, char* argv[], char* env[]);
 
 
-void _say_large() {
-    __say(6, (char* []){"say", "-a", "-q", "-o", OUTPUT_LARGE, INPUT_LARGE}, NULL);
+static inline void _say_large() {
+    __say(6, (char* []){"say", "-a", "-q", "-o", SAY_OUTPUT_LARGE, SAY_INPUT_LARGE}, NULL);
 }
 
-void _say_small() {
-    __say(6, (char* []){"say", "-a", "-q", "-o", OUTPUT_SMALL, INPUT_SMALL}, NULL);
+static inline void _say_small() {
+    __say(6, (char* []){"say", "-a", "-q", "-o", SAY_OUTPUT_SMALL, SAY_INPUT_SMALL}, NULL);
 }
 
 
