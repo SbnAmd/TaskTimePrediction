@@ -35,7 +35,10 @@
 static tsize_t
 _tiffReadProc(thandle_t fd, tdata_t buf, tsize_t size)
 {
-	return ((tsize_t) read((int) fd, buf, (size_t) size));
+	tsize_t ret;
+	ret =  ((tsize_t) read((int) fd, buf, (size_t) size));
+	printf("%d\n", ret == size);
+	return ret;
 }
 
 static tsize_t

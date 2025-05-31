@@ -97,7 +97,7 @@ FILE(GLOB CONSUMER_SOURCES
         "${CMAKE_CURRENT_SOURCE_DIR}/consumer/tiff-v3.5.4/contrib/winnt/*.c"
         "${CMAKE_CURRENT_SOURCE_DIR}/consumer/jpeg/jpeg-6a/*.c"
         "${CMAKE_CURRENT_SOURCE_DIR}/consumer/lame/lame3.70/*.c"
-        "${CMAKE_CURRENT_SOURCE_DIR}/consumer/typeset/lout-3.24/prg2lout.c"
+        "${CMAKE_CURRENT_SOURCE_DIR}/consumer/typeset/lout-3.24/*.c"
         ${MAD_SOURCES}
 )
 
@@ -119,6 +119,7 @@ list(REMOVE_ITEM CONSUMER_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/consumer/tiff-v3.5.4/libtiff/tif_vms.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/consumer/tiff-v3.5.4/libtiff/tif_win3.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/consumer/tiff-v3.5.4/libtiff/tif_win32.c"
+    "${CMAKE_CURRENT_SOURCE_DIR}/consumer/typeset/lout-3.24/prg2lout.c"
 
 )
 

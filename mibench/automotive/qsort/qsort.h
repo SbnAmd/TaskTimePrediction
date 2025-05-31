@@ -5,7 +5,7 @@
 #ifndef QSORT_H
 #define QSORT_H
 
-#define QSORT_PREFIX_PATH "/home/sbn/mibench/automotive/qsort/"
+#define QSORT_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/automotive/qsort/"
 #define QSORT_INPUT_FILE_LARGE QSORT_PREFIX_PATH "input_large.dat"
 #define QSORT_INPUT_FILE_SMALL QSORT_PREFIX_PATH "input_small.dat"
 

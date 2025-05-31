@@ -145,6 +145,7 @@ int _tiff2bw(int argc, char* argv[])
 	if (argc - optind < 2)
 		usage();
 	in = TIFFOpen(argv[optind], "r");
+	// in = TIFFOpen(argv[optind], "a");
 	if (in == NULL)
 		return (-1);
 	photometric = 0;

@@ -127,7 +127,8 @@ TIFFReadDirectory(TIFF* tif)
 		 */
 		(void) ReadOK(tif, &nextdiroff, sizeof (uint32));
 	} else {
-		toff_t off = tif->tif_diroff;
+		//fixed : the casting was needed in new platforms
+		toff_t off = (int)tif->tif_diroff;
 
 		if ((tsize_t) (off + sizeof (uint16)) > tif->tif_size) {
 			TIFFError(tif->tif_name,

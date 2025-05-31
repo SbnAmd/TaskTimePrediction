@@ -12,16 +12,18 @@
 #define LOUT_MAPS          LOUT_PREFIX_PATH "lout-3.24/maps"
 #define LOUT_HYPH          LOUT_PREFIX_PATH "lout-3.24/hyph"
 #define LOUT_INPUT_LARGE        LOUT_PREFIX_PATH "large.lout"
+#define LOUT_OUTPUT_LARGE        LOUT_PREFIX_PATH "large_out.ps"
 #define LOUT_INPUT_SMALL        LOUT_PREFIX_PATH "small.lout"
+#define LOUT_OUTPUT_SMALL        LOUT_PREFIX_PATH "small_out.ps"
 
 int _lout(int argc, char *argv[]);
 
 static inline void _lout_large() {
-    _lout(12, (char*[]){"lout-3.24/lout", "-I", LOUT_INC, "-D", LOUT_DATA, "-F", LOUT_FONT, "-C", LOUT_MAPS, "-H", LOUT_HYPH, LOUT_INPUT_LARGE});
+    _lout(14, (char*[]){"lout-3.24/lout", "-I", LOUT_INC, "-D", LOUT_DATA, "-F", LOUT_FONT, "-C", LOUT_MAPS, "-H", LOUT_HYPH, "-o", LOUT_OUTPUT_LARGE, LOUT_INPUT_LARGE});
 }
 
 static inline void _lout_small() {
-    _lout(12, (char*[]){"lout-3.24/lout", "-I", LOUT_INC, "-D", LOUT_DATA, "-F", LOUT_FONT, "-C", LOUT_MAPS, "-H", LOUT_HYPH, LOUT_INPUT_SMALL});
+    _lout(14, (char*[]){"lout-3.24/lout", "-I", LOUT_INC, "-D", LOUT_DATA, "-F", LOUT_FONT, "-C", LOUT_MAPS, "-H", LOUT_HYPH, "-o", LOUT_OUTPUT_SMALL, LOUT_INPUT_SMALL});
 }
 
 #endif //LOUT_H

@@ -96,6 +96,14 @@ void fft_small();
 void gsm_large();
 void gsm_small();
 
+// fixme: the tests below have issues
+// jpeg
+// tiff
+// gs
+// ispell
+// bf
+// pgp
+// rawaudio
 static const char* mibench_function_names[] = {
     /* Automotive */
     "basicmath_large",
@@ -108,20 +116,20 @@ static const char* mibench_function_names[] = {
     "susan_small",
 
     /* Consumer */
-    "JPEG_large",
-    "JPEG_small",
+    // "JPEG_large",
+    // "JPEG_small",
     "lame_large",
     "lame_small",
     "mad_large",
     "mad_small",
-    "tiff2bw_large",
-    "tiff2bw_small",
-    "tiff2rgba_large",
-    "tiff2rgba_small",
-    "tiffdither_large",
-    "tiffdither_small",
-    "tiffmedian_large",
-    "tiffmedian_small",
+    // "tiff2bw_large",
+    // "tiff2bw_small",
+    // "tiff2rgba_large",
+    // "tiff2rgba_small",
+    // "tiffdither_large",
+    // "tiffdither_small",
+    // "tiffmedian_large",
+    // "tiffmedian_small",
     "lout_large",
     "lout_small",
 
@@ -132,27 +140,27 @@ static const char* mibench_function_names[] = {
     "patricia_small",
 
     /* Office */
-    "gs_large",
-    "gs_small",
-    "ispell_large",
-    "ispell_small",
+    // "gs_large",
+    // "gs_small",
+    // "ispell_large",
+    // "ispell_small",
     "say_large",
     "say_small",
     "stringsearch_large",
     "stringsearch_small",
 
     /* Security */
-    "bf_large",
-    "bf_small",
-    "pgp",
+    // "bf_large",
+    // "bf_small",
+    // "pgp",
     "rijndael_large",
     "rijndael_small",
     "sha_large",
     "sha_small",
 
     /* Telecom */
-    "rawaudio_large",
-    "rawaudio_small",
+    // "rawaudio_large",
+    // "rawaudio_small",
     "crc_large",
     "crc_small",
     "fft_large",
@@ -174,20 +182,20 @@ static void (*mibench_functions[])() = {
     susan_small,
 
     /* Consumer */
-    JPEG_large,
-    JPEG_small,
+    // JPEG_large,
+    // JPEG_small,
     lame_large,
     lame_small,
     mad_large,
     mad_small,
-    tiff2bw_large,
-    tiff2bw_small,
-    tiff2rgba_large,
-    tiff2rgba_small,
-    tiffdither_large,
-    tiffdither_small,
-    tiffmedian_large,
-    tiffmedian_small,
+    // tiff2bw_large,
+    // tiff2bw_small,
+    // tiff2rgba_large,
+    // tiff2rgba_small,
+    // tiffdither_large,
+    // tiffdither_small,
+    // tiffmedian_large,
+    // tiffmedian_small,
     lout_large,
     lout_small,
 
@@ -200,25 +208,25 @@ static void (*mibench_functions[])() = {
     /* Office */
     // gs_large,
     // gs_small,
-    ispell_large,
-    ispell_small,
+    // ispell_large,
+    // ispell_small,
     say_large,
     say_small,
     stringsearch_large,
     stringsearch_small,
 
     /* Security */
-    bf_large,
-    bf_small,
-    pgp,
+    // bf_large,
+    // bf_small,
+    // pgp,
     rijndael_large,
     rijndael_small,
     sha_large,
     sha_small,
 
     /* Telecom */
-    rawaudio_large,
-    rawaudio_small,
+    // rawaudio_large,
+    // rawaudio_small,
     crc_large,
     crc_small,
     fft_large,

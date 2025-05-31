@@ -29,7 +29,7 @@
 /*                                                                           */
 /*****************************************************************************/
 #include "externs.h"
-
+#include "lout.h"
 /* On DOS/Win32 we need to set binary mode on stdout (Uwe) */
 #if OS_DOS
 #include <io.h>
@@ -195,7 +195,8 @@ static FULL_CHAR *GetArg(char *argv[], int argc, int *i)
 /*                                                                           */
 /*****************************************************************************/
 
-int main(int argc, char *argv[])
+// int main(int argc, char *argv[])
+int _lout(int argc, char *argv[])
 { int i, len;  FULL_CHAR *arg;
   OBJECT t, y, res, s;			/* current token, parser output      */
   BOOLEAN stdin_seen;			/* TRUE when stdin file seen         */
@@ -237,11 +238,13 @@ int main(int argc, char *argv[])
   PlainCharHeight = PLAIN_HEIGHT;
   PlainFormFeed = FALSE;
   InitializeAll = FALSE;
-  UseCollate = COLLATE;
+  UseCollate = FALSE;
+  // UseCollate = COLLATE;
   AllowCrossDb = TRUE;
   InMemoryDbIndexes = TRUE;
   Encapsulated = FALSE;
-  SafeExecution = SAFE_DFT ? TRUE : FALSE;
+  SafeExecution = FALSE;
+  // SafeExecution = SAFE_DFT ? TRUE : FALSE;
   Kern = TRUE;
   MemInit();
   InitSym();
@@ -423,18 +426,18 @@ int main(int argc, char *argv[])
 	  "Free source available from:", "ftp://ftp.cs.usyd.edu.au/jeff/lout");
 	fprintf(stderr, "%-28s %s %s\n",
 	  "This executable compiled:", __TIME__, __DATE__);
-	fprintf(stderr, "%-28s %s%s%s\n", "System include directory:",
-	  lib, STR_DIR, INCL_DIR);
-	fprintf(stderr, "%-28s %s%s%s\n", "System database directory:",
-	  lib, STR_DIR, DATA_DIR);
-	fprintf(stderr, "Database index files created afresh automatically:%s\n",
-	  USE_STAT ? " yes" : " no");
-	fprintf(stderr, "Safe execution (disabling system()) is default:%s\n",
-	  SAFE_DFT ? " yes" : " no");
-	fprintf(stderr, "strcoll() used for sorting by default:%s\n",
-	  COLLATE ? " yes" : " no");
-	fprintf(stderr, "PDF compression on:%s\n",
-	  PDF_COMPRESSION ? " yes" : " no");
+	// fprintf(stderr, "%-28s %s%s%s\n", "System include directory:",
+	//   lib, STR_DIR, INCL_DIR);
+	// fprintf(stderr, "%-28s %s%s%s\n", "System database directory:",
+	//   lib, STR_DIR, DATA_DIR);
+	// fprintf(stderr, "Database index files created afresh automatically:%s\n",
+	//   USE_STAT ? " yes" : " no");
+	// fprintf(stderr, "Safe execution (disabling system()) is default:%s\n",
+	//   SAFE_DFT ? " yes" : " no");
+	// fprintf(stderr, "strcoll() used for sorting by default:%s\n",
+	//   COLLATE ? " yes" : " no");
+	// fprintf(stderr, "PDF compression on:%s\n",
+	//   PDF_COMPRESSION ? " yes" : " no");
 	fprintf(stderr, "Debugging (-d, -dd, -ddd flags) available:%s\n",
 	  DEBUG_ON ? " yes" : " no");
 	fprintf(stderr, "\n");

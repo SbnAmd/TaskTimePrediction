@@ -94,7 +94,9 @@ extern nl_catd MsgCat;
 /*  FILTER_ERR          The name of the error file to filters                */
 /*                                                                           */
 /*****************************************************************************/
-
+#define OS_UNIX  1
+#define OS_DOS   0
+#define OS_MAC   0
 #define	LOUT_VERSION    AsciiToFull("Basser Lout Version 3.24 (October 2000)")
 #define	CROSS_DB	   AsciiToFull("lout")
 #define	SOURCE_SUFFIX	   AsciiToFull(".lt")
@@ -108,6 +110,19 @@ extern nl_catd MsgCat;
 #define	FILTER_OUT	   AsciiToFull("lout")
 #define	FILTER_ERR	   AsciiToFull("lout.err")
 
+#define PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/typeset/lout-3.24/"
+#define  INCL_DIR  PREFIX_PATH "include"
+#define  FONT_DIR  PREFIX_PATH "font"
+#define  MAPS_DIR  PREFIX_PATH "maps"
+#define  DATA_DIR  PREFIX_PATH "data"
+#define  HYPH_DIR  PREFIX_PATH "hyph"
+#define  LIB_DIR    "/usr/local/lib/lout"
+#define  LOCALE_DIR "locale" // (only used if LOCALE_ON)
+#define  CHAR_IN    0
+#define  CHAR_OUT   0
+#define  DEBUG_ON   0
+#define  ASSERT_ON  0
+#define  LOCALE_ON  0
 
 /*****************************************************************************/
 /*                                                                           */
@@ -140,7 +155,6 @@ extern nl_catd MsgCat;
 /*  within Lout definitions.                                                 */
 /*                                                                           */
 /*****************************************************************************/
-
 #if OS_UNIX
 #define	READ_BINARY	"r"
 #define	WRITE_BINARY	"w"
@@ -171,7 +185,7 @@ extern nl_catd MsgCat;
 #define	UNCOMPRESS_COM	"gunzip -c %s > %s"
 #define	LOUT_EPS	"lout.eps"
 #else
-If you're compiling this, you've got the wrong settings in the makefile!
+// If you're compiling this, you've got the wrong settings in the makefile!
 #endif
 #endif
 #endif

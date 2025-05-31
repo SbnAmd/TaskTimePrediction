@@ -201,6 +201,4 @@ int __patricia(int argc, char **argv)
 	exit(1);
 }
 
-void _patricia(int argc, char **argv){
-		main(argc, argv);
-}
+

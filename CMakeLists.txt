@@ -5,11 +5,14 @@ project(ExecutionPrediction)
 #add_subdirectory(mibench)
 
 include_directories(PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc/
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/mibench/automotive/bitcount>
+#        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/mibench/automotive/qsort>
 )
 
-add_executable(ExecutionPrediction mibench/test/test.c)
+add_executable(ExecutionPrediction mibench/test/test.c
+#        "${CMAKE_CURRENT_SOURCE_DIR}/mibench/automotive/qsort/qsort_large.c"
+)
 target_link_libraries(ExecutionPrediction PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/lib/libmibench.a m pthread audio md crypto ncurses)
+#target_link_libraries(ExecutionPrediction PUBLIC  m pthread audio md crypto ncurses)
 
 
 #

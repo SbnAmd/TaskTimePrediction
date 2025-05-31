@@ -5,7 +5,7 @@
 #ifndef SUSAN_H
 #define SUSAN_H
 
-#define SUSAN_PREFIX_PATH "/home/sbn/mibench/automotive/susan/"
+#define SUSAN_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/automotive/susan/"
 #define SUSAN_INPUT_FILE_LARGE SUSAN_PREFIX_PATH "input_large.pgm"
 #define SUSAN_OUTPUT_FILE_LARGE_SMOOTHING SUSAN_PREFIX_PATH "output_large.smoothing.pgm"
 #define SUSAN_OUTPUT_FILE_LARGE_EDGES SUSAN_PREFIX_PATH "output_large.edges.pgm"

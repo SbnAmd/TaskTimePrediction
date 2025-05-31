@@ -27,6 +27,8 @@
 /*
  * TIFF Library.
  */
+#include <errno.h>
+
 #include "tiffiop.h"
 
 void _TIFFSetDefaultCompressionState(TIFF* tif);
@@ -288,10 +290,16 @@ TIFFClientOpen(
 			TIFFError(name, "Error writing TIFF header");
 			goto bad;
 		}
+		fprintf(stderr, "DEBUG: TIFF Header (after swap): magic=0x%x, version=0x%x, diroff=0x%lx\n",
+		tif->tif_header.tiff_magic, tif->tif_header.tiff_version, (long)tif->tif_header.tiff_diroff);
+
 		/*
 		 * Setup the byte order handling.
 		 */
 		TIFFInitOrder(tif, tif->tif_header.tiff_magic, bigendian);
+		fprintf(stderr, "DEBUG: TIFF Header (after swap): magic=0x%x, version=0x%x, diroff=0x%lx\n",
+		tif->tif_header.tiff_magic, tif->tif_header.tiff_version, (long)tif->tif_header.tiff_diroff);
+
 		/*
 		 * Setup default directory.
 		 */
@@ -303,6 +311,18 @@ TIFFClientOpen(
 	/*
 	 * Setup the byte order handling.
 	 */
+	// fprintf(stderr,"DEBUG (TIFFClientOpen): tif->tif_header (HEX): 0x");
+	// // void* ptr = (void*)(&tif->tif_header);
+	// const unsigned char *ptr = (const unsigned char *)(&tif->tif_header);
+	// for (int j = 0; j < sizeof(TIFFHeader); j++) {
+	// 	// printf("%02x", ptr[j]);
+	// 	fprintf(stderr,"%02X ", ptr[j]);
+	// }
+	// fprintf(stderr, "\n");
+	// fprintf(stderr, "DEBUG (TIFFClientOpen): tif->tif_header.tiff_diroff (HEX): 0x%08lx\n",
+	// 	tif->tif_header.tiff_diroff);
+	// fprintf(stderr, "DEBUG (TIFFClientOpen): tif->tif_header.tiff_diroff (DEC): %lu\n",
+	// 		(unsigned long)tif->tif_header.tiff_diroff);
 	if (tif->tif_header.tiff_magic != TIFF_BIGENDIAN &&
 	    tif->tif_header.tiff_magic != TIFF_LITTLEENDIAN) {
 		TIFFError(name,  "Not a TIFF file, bad magic number %d (0x%x)",
@@ -310,7 +330,9 @@ TIFFClientOpen(
 		    tif->tif_header.tiff_magic);
 		goto bad;
 	}
+
 	TIFFInitOrder(tif, tif->tif_header.tiff_magic, bigendian);
+	// TIFFInitOrder(tif, tif->tif_header.tiff_magic, 1);
 	/*
 	 * Swap header if required.
 	 */

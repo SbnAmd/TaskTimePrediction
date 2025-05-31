@@ -247,7 +247,7 @@ static void initckch (wchars)
 // int main (int argc, char *	argv[])
 int __ispell (int argc, char *	argv[])
     {
-    char *	p;
+    char *	p ;//= "/home/sbn/Work/Paper/perf_counter_exploit/mibench/office/ispell/tests/americanmed+.hash";
     char *	cpd;
     char **	versionp;
     char *	wchars = NULL;

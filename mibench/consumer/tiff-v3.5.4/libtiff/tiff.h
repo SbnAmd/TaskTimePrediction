@@ -77,11 +77,13 @@ enum TIFFIgnoreSense /* IGNORE tag table */
 	TIS_EMPTY
 };
 
+//fixme: the uint32 acted as long , so commented out
 typedef	struct {
 	uint16	tiff_magic;	/* magic number (defines byte order) */
 	uint16	tiff_version;	/* TIFF version number */
-	uint32	tiff_diroff;	/* byte offset to first directory */
-} TIFFHeader;
+	uint16	tiff_diroff;	/* byte offset to first directory */
+	// uint32	tiff_diroff;	/* byte offset to first directory */
+} __attribute__((packed)) TIFFHeader;
 
 /*
  * TIFF Image File Directories are comprised of

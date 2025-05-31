@@ -4346,8 +4346,8 @@ void PrintUsage()
 /*                                                                           */
 /*****************************************************************************/
 
-// int main(int argc, char *argv[])
-int _lout(int argc, char *argv[])
+int main(int argc, char *argv[])
+// int _lout(int argc, char *argv[])
 { BOOLEAN stdin_seen;  int i, j, arg_pos;
   char *infilename, *outfilename, *errfilename;
   LANGUAGE *lang = NO_LANGUAGE;
