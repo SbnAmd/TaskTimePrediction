@@ -2,6 +2,6 @@
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 
-#include "perf.h"
+#include "../perf_event/perf.h"
 
 #endif //SCHEDULER_H

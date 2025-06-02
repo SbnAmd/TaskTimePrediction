@@ -5,9 +5,9 @@
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 
-#include "perf_wrapper.h"
-#include "barrier.h"
-#include "perf.h"
+#include "../wrapper/perf_wrapper.h"
+#include "../data_structure/barrier.h"
+#include "../perf_event/perf.h"
 #include "utils.h"
 #define MAX_PRIORITY 90
 #define MIN_PRIORITY 30

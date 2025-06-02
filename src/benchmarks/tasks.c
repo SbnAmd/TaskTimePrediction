@@ -5,8 +5,8 @@
 #include <time.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include "def.h"
-#include "tasks.h"
+#include "../def.h"
+#include "../../tasks.h"
 #define ARRAY_SIZE 10000
 
 Func task_array[NUM_THREADS] ={

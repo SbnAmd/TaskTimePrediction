@@ -2,7 +2,7 @@
 // Created by sbn on 5/20/25.
 //
 
-#include "barrier.h"
+#include "../../barrier.h"
 
 
 void barrier_init(barrier_t *barrier, int count) {

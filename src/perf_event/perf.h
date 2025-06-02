@@ -1,6 +1,6 @@
 #pragma once
-#include "def.h"
-#include "stack.h"
+#include "../def.h"
+#include "../data_structure/stack.h"
 
 enum STATUS {
     RUN,
@@ -9,12 +9,12 @@ enum STATUS {
 };
 
 struct perf_param{
-    long cycles;
-    long instructions;
-    long cache_misses;
-    long cache_refs;
-    long branch_misses;
-    long branch_refs;
+    uint64_t cycles;
+    uint64_t instructions;
+    uint64_t cache_misses;
+    uint64_t cache_refs;
+    uint64_t branch_misses;
+    uint64_t branch_refs;
 };
 
 struct task_stat

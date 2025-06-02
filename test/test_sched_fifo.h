@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sched.h>
-#include "../perf_wrapper.h"
+#include "../src/wrapper/perf_wrapper.h"
 
 void* thread_func(void* arg);
 

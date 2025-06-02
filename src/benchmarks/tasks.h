@@ -16,7 +16,7 @@
 #include <time.h>
 #define _XOPEN_SOURCE
 #include <unistd.h>
-#include "perf.h"
+#include "../perf_event/perf.h"
 
 
 
