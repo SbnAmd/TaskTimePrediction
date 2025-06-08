@@ -8,6 +8,7 @@ enum STATUS {
     SUSPEND
 };
 
+/* This order must be kept and not changed */
 struct perf_param{
     uint64_t cycles;
     uint64_t instructions;
@@ -15,21 +16,31 @@ struct perf_param{
     uint64_t cache_refs;
     uint64_t branch_misses;
     uint64_t branch_refs;
+    uint64_t stalled_cycles_frontend;
+    uint64_t stalled_cycles_backend;
+    uint64_t page_faults;
+    uint64_t context_switches;
+    uint64_t cpu_migrations;
+    uint64_t page_faults_maj;
+    uint64_t alignment_faults;
+    uint64_t emulation_faults;
+    uint64_t cache_result_access;
+    uint64_t cache_result_miss;
 };
 
 struct task_stat
 {
     int id;
     long instance;
-    int preemption;
-    struct timespec start_time;
-    struct timespec end_time;
+    int* preemption;
+    struct timespec* start_time;
+    struct timespec* end_time;
     enum STATUS state;
     // PERF vars
     int perf_open;
     int fds[NUM_EVENTS];
     struct perf_event_attr pe[NUM_EVENTS];
-    struct perf_param perf_parameters;
+    struct perf_param* perf_parameters;
     long* execution_times;
 };
 

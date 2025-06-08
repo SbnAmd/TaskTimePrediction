@@ -12,9 +12,12 @@ pthread_mutex_t stack_mtx;
 /* The array of benchmarks */
 extern Func task_array[NUM_THREADS];
 
+// extern const char* mibench_function_names[NUM_THREADS];
+// extern void (*mibench_functions[NUM_THREADS])();
+
 extern struct timespec g_start_time;
 int event_open[NUM_THREADS] = {0};
-extern int  stop;
+extern int  g_stop;
 extern barrier_t barrier;
 extern uint64_t event_configs[NUM_EVENTS];
 
@@ -42,14 +45,14 @@ void* perf_wrapper(void *arg) {
     usleep(10000);
 
     /* Main loop of the thread */
-    while (!stop) {
+    while (!g_stop) {
 
         /* Check if any task is preempted.  If so, changes the status of the task. */
         old_task_id = check_status(task_id, task_stat_arr, &preemption_stack);
 
 
         /* Each thread runs its own workload.  The workload is a function pointer. */
-        task_array[task_id]();
+        mibench_functions[task_id]();
 
 
         /* After finishing the workload, the task status is updated. */
@@ -61,11 +64,13 @@ void* perf_wrapper(void *arg) {
 
 #ifdef RECORD_PERF_COUNT
     // printf("Task[%d] executed %ld times, preempted %d times\n", task_id, task_stat_arr[task_id].instance, task_stat_arr[task_id].preemption);
-
+    save_result(task_id, task_stat_arr);
     /* De initialize the perf events.  This will close the fds. */
     deinit_pe(task_id);
 #endif
 
+
+
     /* De initialize the task status.  This will free the execution times array. */
-    deinit_task_status(task_id, task_stat_arr);
+    // deinit_task_status(task_id, task_stat_arr);
 }

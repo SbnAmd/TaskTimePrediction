@@ -1,9 +1,13 @@
 #include "perf.h"
 
 extern uint64_t event_configs[NUM_EVENTS];
+extern uint64_t hw_event_configs[NUM_HW_EVENTS];
+extern uint64_t sw_event_configs[NUM_SW_EVENTS];
+extern uint64_t cache_event_configs[NUM_CACHE_EVENTS];
 extern IntStack preemption_stack;
 extern struct task_stat task_stat_arr[NUM_THREADS];
 extern int event_open[NUM_THREADS];
+extern int g_stop;
 
 void pin_thread_to_core(int core_id) {
     cpu_set_t cpuset;
@@ -24,27 +28,52 @@ long perf_event_open(struct perf_event_attr *hw_event, pid_t pid, int cpu, int g
 
 /* Initializes the perf events for each thread */
 void init_perf_events(int task_id) {
-
     struct perf_event_attr *pe = task_stat_arr[task_id].pe;
     int *fds = task_stat_arr[task_id].fds;
 
-    /* Reset the memory of event array */
-    memset(pe, 0, sizeof(task_stat_arr[task_id].pe));
+    // Clear the entire array of perf_event_attr
+    memset(pe, 0, NUM_EVENTS * sizeof(struct perf_event_attr));
 
-    /* Configuring and initializing and opening fd of each event */
+    int idx = 0;
+    // Configure hardware events
+    for (int i = 0; i < NUM_HW_EVENTS; ++i, ++idx) {
+        pe[idx].type = PERF_TYPE_HARDWARE;
+        pe[idx].size = sizeof(struct perf_event_attr);
+        pe[idx].config = hw_event_configs[i];
+        pe[idx].disabled = 1;
+        pe[idx].exclude_kernel = 1;
+        pe[idx].exclude_hv = 1;
+    }
+    // Configure software events
+    for (int i = 0; i < NUM_SW_EVENTS; ++i, ++idx) {
+        pe[idx].type = PERF_TYPE_SOFTWARE;
+        pe[idx].size = sizeof(struct perf_event_attr);
+        pe[idx].config = sw_event_configs[i];
+        pe[idx].disabled = 1;
+        pe[idx].exclude_kernel = 1;
+        pe[idx].exclude_hv = 1;
+    }
+    // Configure cache events (assuming cache_event_configs is an array of structs with .cache, .op, .result)
+    for (int i = 0; i < NUM_CACHE_EVENTS; ++i, ++idx) {
+        pe[idx].type = PERF_TYPE_HW_CACHE;
+        pe[idx].size = sizeof(struct perf_event_attr);
+        // If cache_event_configs[i] is a struct, encode as below; otherwise, adjust as needed
+        pe[idx].config = (cache_event_configs[i] << 16);
+        pe[idx].disabled = 1;
+        pe[idx].exclude_kernel = 1;
+        pe[idx].exclude_hv = 1;
+    }
+
+
+    // Open perf events and group them
     for (int i = 0; i < NUM_EVENTS; ++i) {
-        pe[i].type = PERF_TYPE_HARDWARE;
-        pe[i].size = sizeof(struct perf_event_attr);
-        pe[i].config = event_configs[i];
-        pe[i].disabled = 1;  // Start all disabled
-        pe[i].exclude_kernel = 1;
-        pe[i].exclude_hv = 1;
 
-        /* Grouping events  */
-        int group_fd = (i == 0) ? -1 : fds[0];  // First is leader
+        int group_fd = (i == 0) ? -1 : fds[0];
         fds[i] = (int)perf_event_open(&pe[i], 0, -1, group_fd, 0);
+        printf("event[%d] task[%d] gstop = %d\n", i, task_id, g_stop);
         if (fds[i] == -1) {
-            fprintf(stderr, "perf_event_open failed: %s\n", strerror(errno));
+            fprintf(stderr, "thread[%d] perf_event_open[%d] failed: %s\n",task_id, i, strerror(errno));
+            // Consider handling error more gracefully if not in a thread
             pthread_exit(NULL);
         }
     }
@@ -98,16 +127,6 @@ void disable_perf_counter(int task_id) {
     }
 }
 
-// void read_perf_counter(int task_id) {
-//     long long buffer[NUM_EVENTS];
-//     for (int i = 0; i < NUM_EVENTS; ++i) {
-//         if (read(task_stat_arr[task_id].fds[i], &buffer[i], sizeof(long long)) == -1) {
-//             perror("Read failed");
-//         }
-//     }
-//     memcpy(&task_stat_arr[task_id].perf_parameters, buffer, sizeof(struct perf_param));
-// }
-
 void read_perf_counter(int task_id) {
     struct {
         uint64_t nr;
@@ -141,7 +160,7 @@ void read_perf_counter(int task_id) {
     // p->branch_refs    = buffer.values[5];
     // fixme : This is very unsafe, but it works for now
     /* Save result */
-    memcpy(&task_stat_arr[task_id].perf_parameters, buffer.values, sizeof(struct perf_param));
+    memcpy(&task_stat_arr[task_id].perf_parameters[task_stat_arr[task_id].instance], buffer.values, sizeof(struct perf_param));
 }
 
 void append_perf_counter(int task_id) {
@@ -177,6 +196,7 @@ void append_perf_counter(int task_id) {
     for (int i = 0; i < NUM_EVENTS; ++i) {
         buffer.values[i] += buffer1[i];
     }
-    memcpy(&task_stat_arr[task_id].perf_parameters, buffer.values, sizeof(struct perf_param));
+    memcpy(&task_stat_arr[task_id].perf_parameters[task_stat_arr[task_id].instance], buffer.values, sizeof(struct perf_param));
 }
+
 

@@ -8,6 +8,7 @@
 #include "def.h"
 #include "barrier.h"
 #include "helper_functions.h"
+#include "mibench.h"
 
 void* perf_wrapper(void *arg);
 

@@ -25,7 +25,6 @@ void init_tasks(){
 
     pin_thread_to_core(CORE);
     usleep(100000);
-    clock_gettime(CLOCK_MONOTONIC, &g_start_time);
     initStack(&preemption_stack);
     barrier_init(&barrier, NUM_THREADS);
 
@@ -34,8 +33,9 @@ void init_tasks(){
 
         create_thread(&threads[i], perf_wrapper, &thread_ids[i],  priority_array[i], CORE);
         printf("Task[%d] with priority %d created\n", i, priority_array[i]);
-        usleep(1000);
+        usleep(100);
     }
+
 }
 
 #ifdef SCHEDULER

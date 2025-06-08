@@ -87,7 +87,7 @@ void create_thread(pthread_t *thread, void *(*start_routine)(void *), void *arg,
     pthread_attr_destroy(&attr);
 }
 
-
+/*
 void print_perf_events() {
     for (int task_id = 0; task_id < NUM_THREADS; ++task_id) {
         printf("Recorded Perf Events of task[%d] ----------- \n", task_id);
@@ -100,7 +100,7 @@ void print_perf_events() {
         printf("\n\n");
     }
 }
-
+*/
 long get_time_diff(struct timespec start, struct timespec end) {
     long diff = (end.tv_sec - start.tv_sec) * 1000000000 + (end.tv_nsec - start.tv_nsec);
     return diff;

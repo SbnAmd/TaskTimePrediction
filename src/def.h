@@ -19,13 +19,15 @@
 #include <string.h>
 #include <errno.h>
 #include <sched.h>
-
-#define NUM_EVENTS      6
+#define NUM_HW_EVENTS     6
+#define NUM_SW_EVENTS     0//6
+#define NUM_CACHE_EVENTS  0//2
+#define NUM_EVENTS      (NUM_HW_EVENTS + NUM_SW_EVENTS + NUM_CACHE_EVENTS)
 #define TASK_PRIO       50
 #define SCHED_PRIO      80
-#define NUM_THREADS     10
+#define NUM_THREADS     32
 #define CORE            5
-#define INSTANCE_LIMIT  2000
+#define INSTANCE_LIMIT  200
 
 #define RECORD_PERF_COUNT
 

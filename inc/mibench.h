@@ -5,6 +5,7 @@
 #ifndef MIBENCH_H
 #define MIBENCH_H
 // #define PREFIX_PATH  "/home/sbn/Work/Paper/perf_counter_exploit/mibench/"
+#include "def.h"
 
 
 #define NUM_MIBENCH_FUNCTIONS 51
@@ -104,7 +105,7 @@ void gsm_small();
 // bf
 // pgp
 // rawaudio
-static const char* mibench_function_names[] = {
+static const char* mibench_function_names[NUM_THREADS] = {
     /* Automotive */
     "basicmath_large",
     "basicmath_small",
@@ -170,7 +171,7 @@ static const char* mibench_function_names[] = {
 };
 
 // Array of function pointers (type void (*)())
-static void (*mibench_functions[])() = {
+static void (*mibench_functions[NUM_THREADS])() = {
     /* Automotive */
     basicmath_large,
     basicmath_small,

@@ -8,6 +8,7 @@
 
 
 #define NUM_MIBENCH_FUNCTIONS 51
+#include "def.h"
 
 /* Automotive */
 void basicmath_large();
@@ -104,7 +105,7 @@ void gsm_small();
 // bf
 // pgp
 // rawaudio
-static const char* mibench_function_names[] = {
+static const char* mibench_function_names[NUM_THREADS] = {
     /* Automotive */
     "basicmath_large",
     "basicmath_small",
@@ -170,7 +171,7 @@ static const char* mibench_function_names[] = {
 };
 
 // Array of function pointers (type void (*)())
-static void (*mibench_functions[])() = {
+static void (*mibench_functions[NUM_THREADS])() = {
     /* Automotive */
     basicmath_large,
     basicmath_small,
