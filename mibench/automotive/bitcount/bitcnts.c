@@ -25,7 +25,7 @@ void _bitcnts(int argc, char *argv[])
   FILE *fp = fopen("bitcnts_output.txt", "w");
   if (!fp) {
     perror("Failed to open output file");
-    exit(EXIT_FAILURE);
+    exit(1);
   }
 
   clock_t start, stop;
@@ -59,7 +59,7 @@ void _bitcnts(int argc, char *argv[])
   if (argc < 2) {
     fprintf(fp, "Usage: bitcnts <iterations>\n");
     fclose(fp);
-    exit(EXIT_FAILURE);
+    exit(1);
   }
 
   iterations = atoi(argv[1]);

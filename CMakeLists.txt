@@ -27,6 +27,7 @@ FILE(GLOB SOURCES
 
 add_executable(ExecutionPrediction
         ${SOURCES}
+        mibench/mi_def.h
 )
 target_link_libraries(ExecutionPrediction PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/lib/libmibench.a

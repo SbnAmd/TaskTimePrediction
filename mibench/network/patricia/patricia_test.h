@@ -4,8 +4,8 @@
 
 #ifndef PATRICIA_TEST_H
 #define PATRICIA_TEST_H
-
-#define PATRICIA_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/network/patricia/"
+#include "mi_def.h"
+#define PATRICIA_PREFIX_PATH GLOB_PREFIX_PATH "network/patricia/"
 #define PATRICIA_INPUT_LARGE PATRICIA_PREFIX_PATH "large.udp"
 #define PATRICIA_INPUT_SMALL PATRICIA_PREFIX_PATH "small.udp"
 

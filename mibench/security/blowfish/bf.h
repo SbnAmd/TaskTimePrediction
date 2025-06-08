@@ -4,8 +4,8 @@
 
 #ifndef BF_H
 #define BF_H
-
-#define BF_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/blowfish/"
+#include "mi_def.h"
+#define BF_PREFIX_PATH GLOB_PREFIX_PATH "security/blowfish/"
 #define BF_INPUT_LARGE_ASC  BF_PREFIX_PATH "input_large.asc"
 #define BF_OUTPUT_LARGE_ENC  BF_PREFIX_PATH "output_large.enc"
 #define BF_OUTPUT_LARGE_ASC  BF_PREFIX_PATH "output_large.asc"

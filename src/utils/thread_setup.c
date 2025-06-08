@@ -22,7 +22,7 @@ void fillPriorityArray() {
 }
 
 void init_tasks(){
-
+    int ret;
     pin_thread_to_core(CORE);
     usleep(100000);
     initStack(&preemption_stack);

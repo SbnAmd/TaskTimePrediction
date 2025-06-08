@@ -4,7 +4,8 @@
 
 #ifndef RIJNDAEL_H
 #define RIJNDAEL_H
-#define RIJNDAEL_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/rijndael/"
+#include "mi_def.h"
+#define RIJNDAEL_PREFIX_PATH GLOB_PREFIX_PATH "security/rijndael/"
 #define RIJNDAEL_INPUT_LARGE_ASC RIJNDAEL_PREFIX_PATH "input_large.asc"
 #define RIJNDAEL_OUTPUT_LARGE_ENC RIJNDAEL_PREFIX_PATH "output_large.enc"
 #define RIJNDAEL_OUTPUT_LARGE_DEC RIJNDAEL_PREFIX_PATH "output_large.dec"

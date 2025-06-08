@@ -4,8 +4,8 @@
 
 #ifndef RAWAUDIO_H
 #define RAWAUDIO_H
-
-#define RAWAUDIO_PREFIX_PATH  "/home/sbn/Work/Paper/perf_counter_exploit/mibench/telecomm/adpcm/data/"
+#include "mi_def.h"
+#define RAWAUDIO_PREFIX_PATH  GLOB_PREFIX_PATH "telecomm/adpcm/data/"
 
 #define RAWAUDIO_INPUT_LARGE_PCM RAWAUDIO_PREFIX_PATH "large.pcm"
 #define RAWAUDIO_INPUT_LARGE_ADPCM RAWAUDIO_PREFIX_PATH "large.adpcm"

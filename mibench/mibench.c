@@ -1,4 +1,30 @@
 #include "mibench.h"
+#define PC
+#ifdef PC
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/automotive/basicmath/basicmath.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/automotive/bitcount/bitcnts.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/automotive/qsort/qsort.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/automotive/susan/susan.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/consumer/jpeg/jpeg-6a/jpeg.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/consumer/lame/lame3.70/main.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/consumer/mad/mad-0.14.2b/madplay.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/consumer/tiff-v3.5.4/tools/tiff.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/consumer/typeset/lout-3.24/lout.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/network/dijkstra/dijkstra.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/network/patricia/patricia_test.h"
+// #include "/home/sbn/Work/Development/C/TaskExecution/mibench/office/ghostscript/src/gs.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/office/ispell/ispell_test.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/office/rsynth/say_test.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/office/stringsearch/stringsearch.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/security/blowfish/bf.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/security/pgp/src/pgp_test.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/security/rijndael/rijndael.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/security/sha/sha_test.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/telecomm/adpcm/src/rawaudio.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/telecomm/CRC32/crc_test.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/telecomm/FFT/fft.h"
+#include "/home/sbn/Work/Development/C/TaskExecution/mibench/telecomm/gsm/src/gsm_test.h"
+#else
 #include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/automotive/basicmath/basicmath.h"
 #include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/automotive/bitcount/bitcnts.h"
 #include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/automotive/qsort/qsort.h"
@@ -22,6 +48,8 @@
 #include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/telecomm/CRC32/crc_test.h"
 #include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/telecomm/FFT/fft.h"
 #include "/home/sbn/Work/Paper/perf_counter_exploit/mibench/telecomm/gsm/src/gsm_test.h"
+#endif
+
 void basicmath_large() {
     // Implementation of the large basic math benchmark
     _basicmath_large();

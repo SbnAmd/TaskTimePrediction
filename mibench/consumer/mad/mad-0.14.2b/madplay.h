@@ -4,7 +4,10 @@
 
 #ifndef MADPLAY_H
 #define MADPLAY_H
-#define MAD_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/mad/"
+
+#include "mi_def.h"
+
+#define MAD_PREFIX_PATH GLOB_PREFIX_PATH "consumer/mad/"
 #define MAD_INPUT_FILE_LARGE MAD_PREFIX_PATH "large.mp3"
 #define MAD_INPUT_FILE_SMALL MAD_PREFIX_PATH "small.mp3"
 #define MAD_OUTPUT_FILE_LARGE "--output=wave:" MAD_PREFIX_PATH "output_large.wav"

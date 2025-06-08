@@ -4,8 +4,9 @@
 
 #ifndef TIFF_H
 #define TIFF_H
+#include "mi_def.h"
 
-#define TIFF_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/tiff-data/"
+#define TIFF_PREFIX_PATH GLOB_PREFIX_PATH "consumer/tiff-data/"
 
 #define TIFF2BW_INPUT_FILE_LARGE   TIFF_PREFIX_PATH "large.tif"
 #define TIFF2BW_INPUT_FILE_SMALL   TIFF_PREFIX_PATH "small.tif"

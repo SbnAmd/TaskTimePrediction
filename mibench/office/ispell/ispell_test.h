@@ -4,8 +4,8 @@
 
 #ifndef ISPELL_TEST_H
 #define ISPELL_TEST_H
-
-#define ISPELL_PREFIX_PATH     "/home/sbn/Work/Paper/perf_counter_exploit/mibench/office/ispell/tests/"
+#include "mi_def.h"
+#define ISPELL_PREFIX_PATH     GLOB_PREFIX_PATH "ispell/tests/"
 #define ISPELL_INPUT_LARGE     ISPELL_PREFIX_PATH "large.txt"
 #define ISPELL_INPUT_SMALL     ISPELL_PREFIX_PATH "small.txt"
 

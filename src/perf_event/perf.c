@@ -43,6 +43,7 @@ void init_perf_events(int task_id) {
         pe[idx].disabled = 1;
         pe[idx].exclude_kernel = 1;
         pe[idx].exclude_hv = 1;
+        pe[idx].read_format = PERF_FORMAT_GROUP;
     }
     // Configure software events
     for (int i = 0; i < NUM_SW_EVENTS; ++i, ++idx) {
@@ -70,7 +71,7 @@ void init_perf_events(int task_id) {
 
         int group_fd = (i == 0) ? -1 : fds[0];
         fds[i] = (int)perf_event_open(&pe[i], 0, -1, group_fd, 0);
-        printf("event[%d] task[%d] gstop = %d\n", i, task_id, g_stop);
+        // printf("event[%d] task[%d] gstop = %d\n", i, task_id, g_stop);
         if (fds[i] == -1) {
             fprintf(stderr, "thread[%d] perf_event_open[%d] failed: %s\n",task_id, i, strerror(errno));
             // Consider handling error more gracefully if not in a thread
@@ -128,26 +129,30 @@ void disable_perf_counter(int task_id) {
 }
 
 void read_perf_counter(int task_id) {
-    struct {
-        uint64_t nr;
-        uint64_t values[NUM_EVENTS];
-    } buffer;
+    size_t expected_size = sizeof(uint64_t) + sizeof(uint64_t) * NUM_EVENTS;
+    uint8_t *raw_buf = malloc(expected_size);
+    if (!raw_buf) {
+        perror("malloc failed");
+        return;
+    }
 
     /* Selecting the group leader */
     int leader_fd = task_stat_arr[task_id].fds[0];  // fds[0] is the group leader
 
     /* Size of read */
-    ssize_t expected_size = sizeof(buffer.nr) + sizeof(uint64_t) * NUM_EVENTS;
+    // ssize_t expected_size = sizeof(buffer.nr) + sizeof(uint64_t) * NUM_EVENTS;
 
     /* Read the whole group */
-    if (read(leader_fd, &buffer, expected_size) == -1) {
+    if (read(leader_fd, raw_buf, expected_size) == -1) {
         perror("Group read failed");
         return;
     }
 
     /* Check how many events have been read */
-    if (buffer.nr != NUM_EVENTS) {
-        fprintf(stderr, "Unexpected number of events: %llu\n", buffer.nr);
+    uint64_t nr = *(uint64_t *)raw_buf;
+    if (nr != NUM_EVENTS) {
+        fprintf(stderr, "Unexpected number of events: %llu\n", nr);
+        free(raw_buf);
         return;
     }
 
@@ -160,33 +165,42 @@ void read_perf_counter(int task_id) {
     // p->branch_refs    = buffer.values[5];
     // fixme : This is very unsafe, but it works for now
     /* Save result */
-    memcpy(&task_stat_arr[task_id].perf_parameters[task_stat_arr[task_id].instance], buffer.values, sizeof(struct perf_param));
+    // memcpy(&task_stat_arr[task_id].perf_parameters[task_stat_arr[task_id].instance], buffer.values, sizeof(struct perf_param));
+    memcpy(&task_stat_arr[task_id].perf_parameters[task_stat_arr[task_id].instance],
+       raw_buf + sizeof(uint64_t),
+       sizeof(struct perf_param));
+
+    free(raw_buf);
 }
 
 void append_perf_counter(int task_id) {
 
     uint64_t buffer1[NUM_EVENTS] = {0};
 
-    struct {
-        uint64_t nr;
-        uint64_t values[NUM_EVENTS];
-    } buffer;
+    size_t expected_size = sizeof(uint64_t) + sizeof(uint64_t) * NUM_EVENTS;
+    uint8_t *raw_buf = malloc(expected_size);
+    if (!raw_buf) {
+        perror("malloc failed");
+        return;
+    }
 
     /* Selecting the group leader */
     int leader_fd = task_stat_arr[task_id].fds[0];  // fds[0] is the group leader
 
     /* Size of read */
-    ssize_t expected_size = sizeof(buffer.nr) + sizeof(uint64_t) * NUM_EVENTS;
+    // expected_size = sizeof(buffer.nr) + sizeof(uint64_t) * NUM_EVENTS;
 
     /* Read the whole group */
-    if (read(leader_fd, &buffer, expected_size) == -1) {
+    if (read(leader_fd, raw_buf, expected_size) == -1) {
         perror("Group read failed");
         return;
     }
 
     /* Check how many events have been read */
-    if (buffer.nr != NUM_EVENTS) {
-        fprintf(stderr, "Unexpected number of events: %llu\n", buffer.nr);
+    uint64_t nr = *(uint64_t *)raw_buf;
+    if (nr != NUM_EVENTS) {
+        fprintf(stderr, "Unexpected number of events: %llu\n", nr);
+        free(raw_buf);
         return;
     }
 
@@ -194,9 +208,11 @@ void append_perf_counter(int task_id) {
     memcpy(buffer1, &task_stat_arr[task_id].perf_parameters, sizeof(struct perf_param));
      /* Append */
     for (int i = 0; i < NUM_EVENTS; ++i) {
-        buffer.values[i] += buffer1[i];
+        raw_buf[i+1] += buffer1[i];
     }
-    memcpy(&task_stat_arr[task_id].perf_parameters[task_stat_arr[task_id].instance], buffer.values, sizeof(struct perf_param));
+    memcpy(&task_stat_arr[task_id].perf_parameters[task_stat_arr[task_id].instance],
+       raw_buf + sizeof(uint64_t),
+       sizeof(struct perf_param));
 }
 
 

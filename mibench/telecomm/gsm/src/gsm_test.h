@@ -1,8 +1,8 @@
 
 #ifndef GSM_TEST_H
 #define GSM_TEST_H
-
-#define GSM_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/telecomm/gsm/data/"
+#include "mi_def.h"
+#define GSM_PREFIX_PATH GLOB_PREFIX_PATH "telecomm/gsm/data/"
 
 #define GSM_INPUT_LARGE_AU    GSM_PREFIX_PATH   "large.au"
 #define GSM_INPUT_LARGE_GSM      GSM_PREFIX_PATH  "large.au.run.gsm"

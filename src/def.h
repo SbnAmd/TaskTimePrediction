@@ -25,11 +25,18 @@
 #define NUM_EVENTS      (NUM_HW_EVENTS + NUM_SW_EVENTS + NUM_CACHE_EVENTS)
 #define TASK_PRIO       50
 #define SCHED_PRIO      80
-#define NUM_THREADS     32
+#define NUM_THREADS     4
 #define CORE            5
 #define INSTANCE_LIMIT  200
 
 #define RECORD_PERF_COUNT
+
+#define PC
+#ifdef PC
+#define PREFIX_LOG_PATH "/home/sbn/Work/Development/C/TaskExecution/log/"
+#else
+#define PREFIX_LOG_PATH "/home/sbn/Work/Paper/perf_counter_exploit/log/"
+#endif
 
 
 #endif //DEF_H

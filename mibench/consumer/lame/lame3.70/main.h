@@ -4,8 +4,9 @@
 
 #ifndef MAIN_H
 #define MAIN_H
+#include "mi_def.h"
 
-#define LAME_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/lame/"
+#define LAME_PREFIX_PATH GLOB_PREFIX_PATH "consumer/lame/"
 #define LAME_INPUT_FILE_LARGE LAME_PREFIX_PATH "large.wav"
 #define LAME_INPUT_FILE_SMALL LAME_PREFIX_PATH "small.wav"
 #define LAME_OUTPUT_FILE_LARGE LAME_PREFIX_PATH "output_large.mp3"

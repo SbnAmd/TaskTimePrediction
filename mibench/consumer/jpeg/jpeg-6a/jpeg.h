@@ -4,8 +4,10 @@
 
 #ifndef JPEG_H
 #define JPEG_H
+#include "mi_def.h"
 
-#define JPEG_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/jpeg/"
+
+#define JPEG_PREFIX_PATH GLOB_PREFIX_PATH "consumer/jpeg/"
 #define JPEG_INPUT_FILE_LARGE JPEG_PREFIX_PATH "input_large.ppm"
 #define JPEG_INPUT_FILE_SMALL JPEG_PREFIX_PATH "input_small.ppm"
 #define JPEG_OUTPUT_FILE_LARGE_ENCODE JPEG_PREFIX_PATH "output_large_encode.jpeg"

@@ -1,7 +1,7 @@
 #include "basicmath.h"
 #include "snipmath.h"
 #include <math.h>
-
+#include <stdio.h>
 /* The printf's may be removed to isolate just the math calculations */
 
 // int main(void)             // Function name changed to _basicmath_large

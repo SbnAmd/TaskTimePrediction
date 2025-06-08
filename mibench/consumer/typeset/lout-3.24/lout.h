@@ -4,8 +4,9 @@
 
 #ifndef LOUT_H
 #define LOUT_H
+#include "mi_def.h"
 
-#define LOUT_PREFIX_PATH         "/home/sbn/Work/Paper/perf_counter_exploit/mibench/consumer/typeset/"
+#define LOUT_PREFIX_PATH         GLOB_PREFIX_PATH "consumer/typeset/"
 #define LOUT_INC           LOUT_PREFIX_PATH "lout-3.24/include"
 #define LOUT_DATA          LOUT_PREFIX_PATH "lout-3.24/data"
 #define LOUT_FONT          LOUT_PREFIX_PATH "lout-3.24/font"

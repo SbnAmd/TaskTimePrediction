@@ -23,24 +23,42 @@ int compare_small(const void *elem1, const void *elem2)
 // int main(int argc, char *argv[]) {           // Function name changed to _qsort_small to avoid conflict with main()
 int __qsort_small(int argc, char *argv[]) {
   struct myStringStruct array[MAXARRAY];
-  FILE *fp;
-  int i,count=0;
-  
-  if (argc<2) {
-    fprintf(stderr,"Usage: qsort_small <file>\n");
-    exit(-1);
+  FILE *input_fp, *output_fp;
+  int i, count = 0;
+
+  output_fp = fopen("qsort_small_output.txt", "w");
+  if (!output_fp) {
+    perror("Error opening output file");
+    exit(1);
   }
-  else {
-    fp = fopen(argv[1],"r");
-    
-    while((fscanf(fp, "%s", &array[count].qstring) == 1) && (count < MAXARRAY)) {
-	 count++;
-    }
+
+  if (argc < 2) {
+    fprintf(output_fp, "Usage: qsort_small <file>\n");
+    fclose(output_fp);
+    exit(1);
   }
-  printf("\nSorting %d elements.\n\n",count);
-  qsort(array,count,sizeof(struct myStringStruct),compare_small);
-  
-  for(i=0;i<count;i++)
-    printf("%s\n", array[i].qstring);
+
+  input_fp = fopen(argv[1], "r");
+  if (!input_fp) {
+    fprintf(output_fp, "Error: Cannot open input file '%s'\n", argv[1]);
+    fclose(output_fp);
+    exit(1);
+  }
+
+  while ((fscanf(input_fp, "%s", array[count].qstring) == 1) && (count < MAXARRAY)) {
+    count++;
+  }
+
+  fclose(input_fp);
+
+  fprintf(output_fp, "\nSorting %d elements.\n\n", count);
+
+  qsort(array, count, sizeof(struct myStringStruct), compare_small);
+
+  for (i = 0; i < count; i++) {
+    fprintf(output_fp, "%s\n", array[i].qstring);
+  }
+
+  fclose(output_fp);
   return 0;
 }

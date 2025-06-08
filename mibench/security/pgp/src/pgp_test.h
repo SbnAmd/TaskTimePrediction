@@ -4,7 +4,8 @@
 
 #ifndef PGP_TEST_H
 #define PGP_TEST_H
-#define PGP_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/security/pgp/tests/"
+#include "mi_def.h"
+#define PGP_PREFIX_PATH GLOB_PREFIX_PATH "security/pgp/tests/"
 #define PGP_INPUT_FILE PGP_PREFIX_PATH "testin.txt"
 #define PGP_OUTPUT_FILE PGP_PREFIX_PATH "testout.txt.asc"
 

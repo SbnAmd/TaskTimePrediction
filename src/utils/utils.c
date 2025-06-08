@@ -72,6 +72,7 @@ void create_thread(pthread_t *thread, void *(*start_routine)(void *), void *arg,
     ret = pthread_create(thread, &attr, start_routine, arg);
     if (ret != 0) {
         perror("pthread_create");
+        fprintf(stderr, "pthread_create failed: %s\n", strerror(ret));
         exit(EXIT_FAILURE);
     }
 

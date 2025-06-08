@@ -4,8 +4,8 @@
 
 #ifndef DIJKSTRA_H
 #define DIJKSTRA_H
-
-#define DIJKSTRA_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/network/dijkstra/"
+#include "mi_def.h"
+#define DIJKSTRA_PREFIX_PATH GLOB_PREFIX_PATH "network/dijkstra/"
 #define DIJKSTRA_INPUT_FILE DIJKSTRA_PREFIX_PATH "input.dat"
 
 int __dijkstra_large(int argc, char *argv[]);
