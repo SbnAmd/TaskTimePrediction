@@ -204,8 +204,8 @@ void append_perf_counter(int task_id) {
         return;
     }
 
-    // fixme : This is very unsafe, but it works for now
-    memcpy(buffer1, &task_stat_arr[task_id].perf_parameters, sizeof(struct perf_param));
+    // fixme : This is very unsafe, but it works for now, it caused stack smashing
+    memcpy(buffer1, &task_stat_arr[task_id].perf_parameters, sizeof(uint64_t)*NUM_EVENTS);
      /* Append */
     for (int i = 0; i < NUM_EVENTS; ++i) {
         raw_buf[i+1] += buffer1[i];

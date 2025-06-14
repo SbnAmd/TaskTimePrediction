@@ -1,5 +1,5 @@
 #include "mibench.h"
-#define PC
+#include "mi_def.h"
 #ifdef PC
 #include "/home/sbn/Work/Development/C/TaskExecution/mibench/automotive/basicmath/basicmath.h"
 #include "/home/sbn/Work/Development/C/TaskExecution/mibench/automotive/bitcount/bitcnts.h"

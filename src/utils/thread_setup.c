@@ -32,7 +32,7 @@ void init_tasks(){
         thread_ids[i] = i;
 
         create_thread(&threads[i], perf_wrapper, &thread_ids[i],  priority_array[i], CORE);
-        printf("Task[%d] with priority %d created\n", i, priority_array[i]);
+        printf("Task[%d] (%s) with priority %d created\n", i, mibench_function_names[i], priority_array[i]);
         usleep(100);
     }
 

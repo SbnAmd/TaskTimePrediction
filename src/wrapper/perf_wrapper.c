@@ -30,7 +30,7 @@ void print_fds(int task_id) {
 void* perf_wrapper(void *arg) {
     int task_id = *((int*)arg);
     int old_task_id;
-
+    long task_count = 0;
     srand(time(NULL));
 
     /* Initializing the status of each thread */
@@ -42,7 +42,8 @@ void* perf_wrapper(void *arg) {
 
     /* A simple barrier to ensure that all threads are ready before starting */
     barrier_wait(&barrier);
-    usleep(10000);
+
+    // usleep(10000);
 
     /* Main loop of the thread */
     while (!g_stop) {
@@ -52,6 +53,7 @@ void* perf_wrapper(void *arg) {
 
 
         /* Each thread runs its own workload.  The workload is a function pointer. */
+
         mibench_functions[task_id]();
 
 
@@ -60,17 +62,20 @@ void* perf_wrapper(void *arg) {
 
         /* To add some variation in execution time, we sleep for a random amount of time. */
         usleep(10000);
+        task_count++;
     }
 
 #ifdef RECORD_PERF_COUNT
-    // printf("Task[%d] executed %ld times, preempted %d times\n", task_id, task_stat_arr[task_id].instance, task_stat_arr[task_id].preemption);
+
     save_result(task_id, task_stat_arr);
+
     /* De initialize the perf events.  This will close the fds. */
     deinit_pe(task_id);
+    fprintf(stderr, "Task[%d] executed %ld times\n",task_id, task_count);
 #endif
 
 
 
     /* De initialize the task status.  This will free the execution times array. */
-    // deinit_task_status(task_id, task_stat_arr);
+    deinit_task_status(task_id, task_stat_arr);
 }

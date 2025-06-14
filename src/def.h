@@ -31,7 +31,7 @@
 
 #define RECORD_PERF_COUNT
 
-#define PC
+//#define PC
 #ifdef PC
 #define PREFIX_LOG_PATH "/home/sbn/Work/Development/C/TaskExecution/log/"
 #else

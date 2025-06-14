@@ -165,7 +165,7 @@ void save_result(int task_id, struct task_stat* task_stat_arr) {
         "Alignment Faults ,"
         "Emulation Faults ,"
         "Cache Result Access ,"
-        "Cache Result Miss"
+        "Cache Result Miss\n"
     };
     // extern const char* mibench_function_names[NUM_THREADS];
     snprintf(filename, sizeof(filename), "%sresult_%s.txt", PREFIX_LOG_PATH, mibench_function_names[task_id]);
@@ -176,7 +176,7 @@ void save_result(int task_id, struct task_stat* task_stat_arr) {
     }
 
     fputs(header,file);
-    for (int i = 0; i < INSTANCE_LIMIT; i++) {
+    for (int i = 0; i < task_stat_arr[task_id].instance; i++) {
         int per = task_stat_arr[task_id].preemption[i];
         append_perf_to_file(
             file,
