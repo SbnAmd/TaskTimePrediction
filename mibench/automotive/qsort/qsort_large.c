@@ -61,7 +61,7 @@ int __qsort_large(int argc, char *argv[]) {
     array[count].distance = sqrt((double)(x * x + y * y + z * z));
     count++;
          }
-
+  // fixme
   fclose(input_fp);
 
   fprintf(output_fp, "\nSorting %d vectors based on distance from the origin.\n\n", count);
