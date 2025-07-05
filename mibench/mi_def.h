@@ -10,7 +10,7 @@
 #ifdef PC
 #define GLOB_PREFIX_PATH "/home/sbn/Work/Development/C/TaskExecution/mibench/"
 #else
-#define GLOB_PREFIX_PATH "/home/sbn/Work/Paper/perf_counter_exploit/mibench/"
+#define GLOB_PREFIX_PATH "/home/sbn/Work/Paper/mibench/"
 #endif
 
 

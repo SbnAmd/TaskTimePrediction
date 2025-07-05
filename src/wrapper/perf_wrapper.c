@@ -51,11 +51,8 @@ void* perf_wrapper(void *arg) {
         /* Check if any task is preempted.  If so, changes the status of the task. */
         old_task_id = check_status(task_id, task_stat_arr, &preemption_stack);
 
-
         /* Each thread runs its own workload.  The workload is a function pointer. */
-
         mibench_functions[task_id]();
-
 
         /* After finishing the workload, the task status is updated. */
         return_status(task_id, old_task_id, task_stat_arr, &preemption_stack);
