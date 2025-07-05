@@ -88,7 +88,7 @@ void* workload_wrapper(void* arg)
     }
 
     // Simulate workload by sleeping for the specified duration
-    usleep(workload);
+    usleep(100000);
     pthread_mutex_lock(&mutex);
     push(&thread_stack, thread_id);
     printf("Thread %d woke up workload of %ld loops\n", thread_id, workload);
@@ -98,7 +98,7 @@ void* workload_wrapper(void* arg)
     for (int j = 0 ; j < REPETITION; j++)
     {
         for (long i = 0; i < workload; i++);
-        usleep(workload);
+        // usleep(workload);
     }
 
 
@@ -128,7 +128,7 @@ void setup()
         thread_ids[i] = i;
         thread_params[i].thread_id = i;
         thread_params[i].workload = workload_array[i];
-        create_thread(&threads[i], workload_wrapper, &thread_params[i],  priority_array[i], CORE);
+        create_thread(&threads[i], workload_wrapper, &thread_params[i],  priority_array[i], TEST_CORE);
         printf("Task[%d] with priority %d created\n", i, priority_array[i]);
     }
 

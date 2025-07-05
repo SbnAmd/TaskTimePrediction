@@ -25,11 +25,18 @@ FILE(GLOB SOURCES
         "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c"
     )
 
-add_executable(ExecutionPrediction
-        ${SOURCES}
-        mibench/mi_def.h
+FILE(GLOB TEST_SOURCES
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/utils.c"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/data_structure/*.c"
         test/execution_order/exe_ord.c
         test/execution_order/exe_ord.h
+)
+
+add_executable(ExecutionPrediction
+#        ${SOURCES}
+        ${TEST_SOURCES}
+        mibench/mi_def.h
+
 )
 target_link_libraries(ExecutionPrediction PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/lib/libmibench.a
