@@ -28,14 +28,20 @@ FILE(GLOB SOURCES
 FILE(GLOB TEST_SOURCES
         "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/utils.c"
         "${CMAKE_CURRENT_SOURCE_DIR}/src/data_structure/*.c"
-        test/execution_order/exe_ord.c
-        test/execution_order/exe_ord.h
+#        test/execution_order/exe_ord.c
+#        test/execution_order/exe_ord.h
+        test/stats_monitoring/stat_mon.c
+        test/stats_monitoring/stat_mon.h
 )
 
 add_executable(ExecutionPrediction
 #        ${SOURCES}
         ${TEST_SOURCES}
         mibench/mi_def.h
+#        test/stats_monitoring/stat_mon.c
+#        test/stats_monitoring/stat_mon.h
+        perf_count/perf_count.c
+        perf_count/perf_count.h
 
 )
 target_link_libraries(ExecutionPrediction PUBLIC
