@@ -33,7 +33,7 @@ int  __qsort_large(int argc, char *argv[]) {
   int x, y, z;
 
   if (argc<2) {
-    printf("Usage: qsort_large <file>\n");
+    //printf("Usage: qsort_large <file>\n");
     exit(-1);
   }
   else {
@@ -47,10 +47,10 @@ int  __qsort_large(int argc, char *argv[]) {
       count++;
     }
   }
-  printf("\nSorting %d vectors based on distance from the origin.\n\n",count);
+  //printf("\nSorting %d vectors based on distance from the origin.\n\n",count);
   qsort(array,count,sizeof(struct my3DVertexStruct),compare_large);
 
   for(i=0;i<count;i++)
-    printf("%d %d %d\n", array[i].x, array[i].y, array[i].z);
+    //printf("%d %d %d\n", array[i].x, array[i].y, array[i].z);
   return 0;
 }

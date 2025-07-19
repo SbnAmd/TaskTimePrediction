@@ -53,7 +53,7 @@ void _bitcnts(int argc, char *argv[])
 	}
   iterations=atoi(argv[1]);
 
-  puts("Bit counter algorithm benchmark\n");
+  // puts("Bit counter algorithm benchmark\n");
 
   for (i = 0; i < FUNCS; i++) {
     start = clock();
@@ -72,10 +72,10 @@ void _bitcnts(int argc, char *argv[])
 	 cmaxix = i;
     }
 
-    printf("%-38s> Time: %7.3f sec.; Bits: %ld\n", text[i], ct, n);
+    //printf("%-38s> Time: %7.3f sec.; Bits: %ld\n", text[i], ct, n);
   }
-  printf("\nBest  > %s\n", text[cminix]);
-  printf("Worst > %s\n", text[cmaxix]);
+  //printf("\nBest  > %s\n", text[cminix]);
+  //printf("Worst > %s\n", text[cmaxix]);
   // return 0;
 }
 

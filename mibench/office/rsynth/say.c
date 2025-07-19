@@ -70,7 +70,7 @@ int n;
 darray_ptr phone;
 {
  unsigned nph = 0;
- fprintf(stderr, "Spelling '%.*s'\n", n, word);
+ // fprintf(stderr, "Spelling '%.*s'\n", n, word);
  while (n-- > 0)
   {
    nph += xlate_string(ASCII[*word++ & 0x7F], phone);
@@ -157,7 +157,7 @@ darray_ptr phone;
    else
     {
      if (dict || verbose)
-      fprintf(stderr, "Guess %p '%.*s'\n", dict, n, word);
+      // fprintf(stderr, "Guess %p '%.*s'\n", dict, n, word);
      nph += NRL(word, n, phone);
     }
   }
@@ -189,7 +189,7 @@ int verbose;
    unsigned max_samples = frames * klatt_global.nspfr;
    short *samp = (short *) malloc(sizeof(short) * max_samples);
    if (verbose)
-    fprintf(stderr,"%.*s\n", len, phone);
+    // fprintf(stderr,"%.*s\n", len, phone);
    if (samp)
     {
      unsigned nsamp = holmes(elm.items, (unsigned char *) darray_find(&elm, 0),
@@ -413,9 +413,9 @@ int __say(int argc, char* argv[], char* env[]){
  argc = getargs("Misc",argc, argv, "v", NULL, &verbose, "Verbose, show phonetic form",NULL);
  if (help_only)
   {
-   fprintf(stderr,"Usage: %s [options as above] words to say\n",program);
-   fprintf(stderr,"or     %s [options as above] < file-to-say\n",program);
-   fprintf(stderr,"(%s)\n",Revision);
+   // fprintf(stderr,"Usage: %s [options as above] words to say\n",program);
+   // fprintf(stderr,"or     %s [options as above] < file-to-say\n",program);
+   // fprintf(stderr,"(%s)\n",Revision);
   }
  else
   {

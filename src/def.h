@@ -29,6 +29,11 @@
 #define CORE            5
 #define INSTANCE_LIMIT  200
 
+#define RED_C     "\033[1;31m"
+#define GREEN_C   "\033[1;32m"
+#define YELLOW_C  "\033[1;33m"
+#define RESET_C   "\033[0m"
+
 #define RECORD_PERF_COUNT
 
 //#define PC

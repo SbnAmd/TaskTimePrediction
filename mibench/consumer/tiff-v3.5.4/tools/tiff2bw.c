@@ -37,9 +37,9 @@
 
 /* x% weighting -> fraction of full color */
 #define	PCT(x)	(((x)*255)/100)
-int	RED = PCT(28);		/* 28% */
-int	GREEN = PCT(59);	/* 59% */
-int	BLUE = PCT(11);		/* 11% */
+int	RED_Colort = PCT(28);		/* 28% */
+int	GREEN_Colort = PCT(59);	/* 59% */
+int	BLUE_Colort = PCT(11);		/* 11% */
 
 static	void usage(void);
 static	int processCompressOptions(char*);
@@ -47,7 +47,7 @@ static	int processCompressOptions(char*);
 static void
 compresscontig(unsigned char* out, unsigned char* rgb, uint32 n)
 {
-	register int v, red = RED, green = GREEN, blue = BLUE;
+	register int v, red = RED_Colort, green = GREEN_Colort, blue = BLUE_Colort;
 
 	while (n-- > 0) {
 		v = red*(*rgb++);
@@ -61,7 +61,7 @@ static void
 compresssep(unsigned char* out,
     unsigned char* r, unsigned char* g, unsigned char* b, uint32 n)
 {
-	register uint32 red = RED, green = GREEN, blue = BLUE;
+	register uint32 red = RED_Colort, green = GREEN_Colort, blue = BLUE_Colort;
 
 	while (n-- > 0)
 		*out++ = (red*(*r++) + green*(*g++) + blue*(*b++)) >> 8;
@@ -80,7 +80,7 @@ checkcmap(TIFF* tif, int n, uint16* r, uint16* g, uint16* b)
 static void
 compresspalette(unsigned char* out, unsigned char* data, uint32 n, uint16* rmap, uint16* gmap, uint16* bmap)
 {
-	register int v, red = RED, green = GREEN, blue = BLUE;
+	register int v, red = RED_Colort, green = GREEN_Colort, blue = BLUE_Colort;
 
 	while (n-- > 0) {
 		unsigned int ix = *data++;
@@ -130,13 +130,13 @@ int _tiff2bw(int argc, char* argv[])
 			rowsperstrip = atoi(optarg);
 			break;
 		case 'R':
-			RED = PCT(atoi(optarg));
+			// RED = PCT(atoi(optarg));
 			break;
 		case 'G':
-			GREEN = PCT(atoi(optarg));
+			// GREEN = PCT(atoi(optarg));
 			break;
 		case 'B':
-			BLUE = PCT(atoi(optarg));
+			// BLUE = PCT(atoi(optarg));
 			break;
 		case '?':
 			usage();

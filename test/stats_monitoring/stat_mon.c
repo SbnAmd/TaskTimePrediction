@@ -52,7 +52,7 @@ void print_matrix(int* ptr, long rows, long cols)
 
 void init_task_matrix()
 {
-    int task_id_array[NUM_THREADS] = {0};//, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+    int task_id_array[NUM_THREADS] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};//, 11, 12, 13, 14, 15};
 
     for (long i = 0; i < NUM_EXECUTIONS; i++)
     {
@@ -71,7 +71,7 @@ void init_task_matrix()
 
 void init_delay_matrix()
 {
-    long delay_array[NUM_THREADS] = {0};//, 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 9000, 1000, 11000, 1200, 13000, 1400, 15000};
+    long delay_array[NUM_THREADS] = {0, 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 9000, 1000};//, 11000, 1200, 13000, 1400, 15000};
 
     for (long i = 0; i < NUM_EXECUTIONS; i++)
     {
@@ -106,8 +106,8 @@ void* thread_task(void *arg)
     for (long i = 0; i < NUM_EXECUTIONS; i++)
     {
         usleep(delay_matrix[task_id][i]);
-        mibench_functions[task_matrix[task_id][i]+3]();
-        printf("Task id %d, instance %ld\n", task_id, i);
+        mibench_functions[task_matrix[task_id][i]]();
+        printf(GREEN_C "Task id %d, instance %ld\n" RESET_C, task_id, i);
     }
 
 }
@@ -126,7 +126,7 @@ void setup()
         thread_ids[i] = i;
         create_thread(&threads[i], thread_task, &thread_ids[i], priority_array[i], CORE);
         pthread_detach(threads[i]);
-        printf("Task[%d] with priority %d created\n", i, priority_array[i]);
+        printf(YELLOW_C "Task[%d] with priority %d created\n" RESET_C, i, priority_array[i]);
     }
 
 }
@@ -135,7 +135,7 @@ int main()
 {
 
     setup();
-    sleep(1);
+    sleep(4);
     // for (int i = 0; i < NUM_THREADS; i++)
     // {
     //     pthread_join(threads[i], NULL);

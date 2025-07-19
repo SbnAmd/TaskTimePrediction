@@ -157,11 +157,11 @@ int _stringsearch_small()
       {
             init_search(find_strings[i]);
             here = strsearch(search_strings[i]);
-            fprintf(out, "\"%s\" is%s in \"%s\"", find_strings[i],
-                  here ? "" : " not", search_strings[i]);
-            if (here)
-                  fprintf(out, " [\"%s\"]", here);
-            fprintf(out, "\n");
+            // fprintf(out, "\"%s\" is%s in \"%s\"", find_strings[i],
+            //       here ? "" : " not", search_strings[i]);
+            // if (here)
+            //       fprintf(out, " [\"%s\"]", here);
+            // fprintf(out, "\n");
       }
 
       return 0;

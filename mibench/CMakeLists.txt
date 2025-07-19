@@ -152,7 +152,9 @@ add_library(mibench STATIC
         ${NETWORK_SOURCES}
         ${OFFICE_SOURCES}
 )
-
+# Force no optimization for all build types
+set(CMAKE_C_FLAGS "-O0 ${CMAKE_C_FLAGS}")
+set(CMAKE_CXX_FLAGS "-O0 ${CMAKE_CXX_FLAGS}")
 
 
 # Set the include directories so that other projects can find the header

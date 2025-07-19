@@ -119,10 +119,10 @@ static const char* mibench_function_names[32] = {
     /* Consumer */
     // "JPEG_large",
     // "JPEG_small",
-    "lame_large",
-    "lame_small",
-    "mad_large",
-    "mad_small",
+    // "lame_large",
+    // "lame_small",
+    // "mad_large",
+    // "mad_small",
     // "tiff2bw_large",
     // "tiff2bw_small",
     // "tiff2rgba_large",
@@ -131,14 +131,14 @@ static const char* mibench_function_names[32] = {
     // "tiffdither_small",
     // "tiffmedian_large",
     // "tiffmedian_small",
-    "lout_large",
-    "lout_small",
+    // "lout_large",
+    // "lout_small",
 
     /* Network */
     "dijkstra_large",
     "dijkstra_small",
-    "patricia_large",
-    "patricia_small",
+    // "patricia_large",
+    // "patricia_small",
 
     /* Office */
     // "gs_large",
@@ -185,10 +185,10 @@ static void (*mibench_functions[32])() = {
     /* Consumer */
     // JPEG_large,
     // JPEG_small,
-    lame_large,
-    lame_small,
-    mad_large,
-    mad_small,
+    // lame_large,
+    // lame_small,
+    // mad_large,
+    // mad_small,
     // tiff2bw_large,
     // tiff2bw_small,
     // tiff2rgba_large,
@@ -197,14 +197,14 @@ static void (*mibench_functions[32])() = {
     // tiffdither_small,
     // tiffmedian_large,
     // tiffmedian_small,
-    lout_large,
-    lout_small,
+    // lout_large,
+    // lout_small,
 
     /* Network */
     dijkstra_large,
     dijkstra_small,
-    patricia_large,
-    patricia_small,
+    // patricia_large,
+    // patricia_small,
 
     /* Office */
     // gs_large,

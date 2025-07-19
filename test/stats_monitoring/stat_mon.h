@@ -10,7 +10,7 @@
 #include "utils/thread_setup.h"
 #include "mibench.h"
 
-#define NUM_THREADS 1
+#define NUM_THREADS 11
 #define NUM_EXECUTIONS (10)
 #define CORE 1
 #define PRIORITY_OFFSET  30

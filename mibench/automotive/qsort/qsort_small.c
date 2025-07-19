@@ -37,10 +37,10 @@ int __qsort_small(int argc, char *argv[]) {
       count++;
     }
   }
-  printf("\nSorting %d elements.\n\n",count);
+  //printf("\nSorting %d elements.\n\n",count);
   qsort(array,count,sizeof(struct myStringStruct),compare_small);
 
   for(i=0;i<count;i++)
-    printf("%s\n", array[i].qstring);
+    //printf("%s\n", array[i].qstring);
   return 0;
 }
