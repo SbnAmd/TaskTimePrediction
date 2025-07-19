@@ -52,7 +52,7 @@ void print_matrix(int* ptr, long rows, long cols)
 
 void init_task_matrix()
 {
-    int task_id_array[NUM_THREADS] = {0, 1};//, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+    int task_id_array[NUM_THREADS] = {0};//, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 
     for (long i = 0; i < NUM_EXECUTIONS; i++)
     {
@@ -71,7 +71,7 @@ void init_task_matrix()
 
 void init_delay_matrix()
 {
-    long delay_array[NUM_THREADS] = {0, 100000};//, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 9000, 1000, 11000, 1200, 13000, 1400, 15000};
+    long delay_array[NUM_THREADS] = {0};//, 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 9000, 1000, 11000, 1200, 13000, 1400, 15000};
 
     for (long i = 0; i < NUM_EXECUTIONS; i++)
     {

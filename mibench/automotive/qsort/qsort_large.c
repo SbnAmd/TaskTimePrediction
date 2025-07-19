@@ -26,52 +26,31 @@ int compare_large(const void *elem1, const void *elem2)
 
 
 // int  main(int argc, char *argv[]) {        // Function name changed to avoid conflict with main()
-int __qsort_large(int argc, char *argv[]) {
+int  __qsort_large(int argc, char *argv[]) {
   struct my3DVertexStruct array[MAXARRAY];
-  FILE *input_fp, *output_fp;
-  int i, count = 0;
+  FILE *fp;
+  int i,count=0;
   int x, y, z;
 
-  output_fp = fopen("qsort_large_output.txt", "w");
-  if (!output_fp) {
-    perror("Error opening output file");
-    exit(1);
+  if (argc<2) {
+    printf("Usage: qsort_large <file>\n");
+    exit(-1);
   }
+  else {
+    fp = fopen(argv[1],"r");
 
-  if (argc < 2) {
-    fprintf(output_fp, "Usage: qsort_large <file>\n");
-    fclose(output_fp);
-    exit(1);
+    while((fscanf(fp, "%d", &x) == 1) && (fscanf(fp, "%d", &y) == 1) && (fscanf(fp, "%d", &z) == 1) &&  (count < MAXARRAY)) {
+      array[count].x = x;
+      array[count].y = y;
+      array[count].z = z;
+      array[count].distance = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+      count++;
+    }
   }
+  printf("\nSorting %d vectors based on distance from the origin.\n\n",count);
+  qsort(array,count,sizeof(struct my3DVertexStruct),compare_large);
 
-  input_fp = fopen(argv[1], "r");
-  if (!input_fp) {
-    fprintf(output_fp, "Error: Cannot open input file '%s'\n", argv[1]);
-    fclose(output_fp);
-    exit(1);
-  }
-
-  while ((fscanf(input_fp, "%d", &x) == 1) &&
-         (fscanf(input_fp, "%d", &y) == 1) &&
-         (fscanf(input_fp, "%d", &z) == 1) &&
-         (count < MAXARRAY)) {
-    array[count].x = x;
-    array[count].y = y;
-    array[count].z = z;
-    array[count].distance = sqrt((double)(x * x + y * y + z * z));
-    count++;
-         }
-  // fixme
-  fclose(input_fp);
-
-  fprintf(output_fp, "\nSorting %d vectors based on distance from the origin.\n\n", count);
-
-  qsort(array, count, sizeof(struct my3DVertexStruct), compare_large);
-
-  for (i = 0; i < count; i++) {
-    fprintf(output_fp, "%d %d %d\n", array[i].x, array[i].y, array[i].z);
-  }
-
-  fclose(output_fp);
+  for(i=0;i<count;i++)
+    printf("%d %d %d\n", array[i].x, array[i].y, array[i].z);
   return 0;
 }
