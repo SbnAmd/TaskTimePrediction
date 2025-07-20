@@ -119,10 +119,10 @@ static const char* mibench_function_names[32] = {
     /* Consumer */
     // "JPEG_large",
     // "JPEG_small",
-    "lame_large",
-    "lame_small",
-    "mad_large",
-    "mad_small",
+    // "lame_large",
+    // "lame_small",
+    // "mad_large",
+    // "mad_small",
     // "tiff2bw_large",
     // "tiff2bw_small",
     // "tiff2rgba_large",
@@ -131,8 +131,8 @@ static const char* mibench_function_names[32] = {
     // "tiffdither_small",
     // "tiffmedian_large",
     // "tiffmedian_small",
-    "lout_large",
-    "lout_small",
+    // "lout_large",
+    // "lout_small",
 
     /* Network */
     "dijkstra_large",
@@ -145,8 +145,8 @@ static const char* mibench_function_names[32] = {
     // "gs_small",
     // "ispell_large",
     // "ispell_small",
-    "say_large",
-    "say_small",
+    // "say_large",
+    // "say_small",
     "stringsearch_large",
     "stringsearch_small",
 
@@ -154,20 +154,20 @@ static const char* mibench_function_names[32] = {
     // "bf_large",
     // "bf_small",
     // "pgp",
-    "rijndael_large",
-    "rijndael_small",
-    "sha_large",
-    "sha_small",
+    // "rijndael_large",
+    // "rijndael_small",
+    // "sha_large",
+    // "sha_small",
 
     /* Telecom */
     // "rawaudio_large",
     // "rawaudio_small",
-    "crc_large",
-    "crc_small",
-    "fft_large",
-    "fft_small",
-    "gsm_large",
-    "gsm_small"
+    // "crc_large",
+    // "crc_small",
+    // "fft_large",
+    // "fft_small",
+    // "gsm_large",
+    // "gsm_small"
 };
 
 // Array of function pointers (type void (*)())
@@ -185,10 +185,10 @@ static void (*mibench_functions[32])() = {
     /* Consumer */
     // JPEG_large,
     // JPEG_small,
-    lame_large,
-    lame_small,
-    mad_large,
-    mad_small,
+    // lame_large,
+    // lame_small,
+    // mad_large,
+    // mad_small,
     // tiff2bw_large,
     // tiff2bw_small,
     // tiff2rgba_large,
@@ -197,8 +197,8 @@ static void (*mibench_functions[32])() = {
     // tiffdither_small,
     // tiffmedian_large,
     // tiffmedian_small,
-    lout_large,
-    lout_small,
+    // lout_large,
+    // lout_small,
 
     /* Network */
     dijkstra_large,
@@ -211,8 +211,8 @@ static void (*mibench_functions[32])() = {
     // gs_small,
     // ispell_large,
     // ispell_small,
-    say_large,
-    say_small,
+    // say_large,
+    // say_small,
     stringsearch_large,
     stringsearch_small,
 
@@ -220,20 +220,20 @@ static void (*mibench_functions[32])() = {
     // bf_large,
     // bf_small,
     // pgp,
-    rijndael_large,
-    rijndael_small,
-    sha_large,
-    sha_small,
+    // rijndael_large,
+    // rijndael_small,
+    // sha_large,
+    // sha_small,
 
     /* Telecom */
     // rawaudio_large,
     // rawaudio_small,
-    crc_large,
-    crc_small,
-    fft_large,
-    fft_small,
-    gsm_large,
-    gsm_small
+    // crc_large,
+    // crc_small,
+    // fft_large,
+    // fft_small,
+    // gsm_large,
+    // gsm_small
 };
 
 #endif //MIBENCH_H
