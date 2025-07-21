@@ -14,7 +14,7 @@ int thread_ids[NUM_THREADS];
 static void shuffle_int_array(int *array, int n)
 {
     if (n > 1) {
-        srand((unsigned int)time(NULL));
+
         for (int i = n - 1; i > 0; i--) {
             int j = rand() % (i + 1);
             int temp = array[i];
@@ -28,7 +28,7 @@ static void shuffle_int_array(int *array, int n)
 static void shuffle_long_array(long *array, int n)
 {
     if (n > 1) {
-        srand((unsigned int)time(NULL));
+        // srand((unsigned int)time(NULL));
         for (int i = n - 1; i > 0; i--) {
             int j = rand() % (i + 1);
             long temp = array[i];
@@ -110,6 +110,7 @@ void* thread_task(void *arg)
 
 void setup()
 {
+    srand((unsigned int)time(NULL));
     // initStack(&thread_stack);
     // print_matrix(task_matrix, NUM_EXECUTIONS, NUM_THREADS);
     init_delay_matrix();
