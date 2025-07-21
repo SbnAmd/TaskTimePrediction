@@ -145,8 +145,8 @@ static const char* mibench_function_names[32] = {
     // "gs_small",
     // "ispell_large",
     // "ispell_small",
-    "say_large",
-    "say_small",
+    // "say_large",
+    // "say_small",
     "stringsearch_large",
     "stringsearch_small",
 
@@ -211,8 +211,8 @@ static void (*mibench_functions[32])() = {
     // gs_small,
     // ispell_large,
     // ispell_small,
-    say_large,
-    say_small,
+    // say_large,
+    // say_small,
     stringsearch_large,
     stringsearch_small,
 

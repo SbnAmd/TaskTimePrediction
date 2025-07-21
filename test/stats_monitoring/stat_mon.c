@@ -62,11 +62,6 @@ void init_task_matrix()
         }
         shuffle_int_array(task_matrix[i], NUM_THREADS);
     }
-
-    for (long i = 0; i < NUM_EXECUTIONS; i++)
-    {
-        printf("%d, %d\n", task_matrix[i][0], task_matrix[i][1]);
-    }
 }
 
 void init_delay_matrix()
@@ -95,6 +90,7 @@ void init_priorities(int* priority_array)
 void* thread_task(void *arg)
 {
     int task_id = *((int*) arg);
+    char* name;
     // long execution_counter = 0;
 
     if (task_id >= NUM_THREADS)
@@ -107,8 +103,10 @@ void* thread_task(void *arg)
     {
         usleep(delay_matrix[task_id][i]);
         mibench_functions[task_matrix[task_id][i]]();
-        printf(GREEN_C "Task id %d, instance %ld\n" RESET_C, task_id, i);
+        name = mibench_function_names[task_matrix[task_id][i]];
+        printf(GREEN_C "Task id (%s) %d,\t instance %ld\n" RESET_C, name, task_id, i);
     }
+    printf("Thread %d finished\n", task_id)
 
 }
 
@@ -134,8 +132,17 @@ void setup()
 int main()
 {
 
+    struct sched_param param;
+
+    param.sched_priority = 90;
+    // Set scheduler for the current process (main thread)
+    if (sched_setscheduler(0, SCHED_FIFO, &param) == -1) {
+        perror("sched_setscheduler");
+        exit(EXIT_FAILURE);
+    }
+
     setup();
-    sleep(4);
+    sleep(10);
     // for (int i = 0; i < NUM_THREADS; i++)
     // {
     //     pthread_join(threads[i], NULL);
