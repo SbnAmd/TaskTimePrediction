@@ -135,10 +135,10 @@ static const char* mibench_function_names[32] = {
     // "lout_small",
 
     /* Network */
-    "dijkstra_large",
-    "dijkstra_small",
-    "patricia_large",
-    "patricia_small",
+    // "dijkstra_large",
+    // "dijkstra_small",
+    // "patricia_large",
+    // "patricia_small",
 
     /* Office */
     // "gs_large",
@@ -201,10 +201,10 @@ static void (*mibench_functions[32])() = {
     // lout_small,
 
     /* Network */
-    dijkstra_large,
-    dijkstra_small,
-    patricia_large,
-    patricia_small,
+    // dijkstra_large,
+    // dijkstra_small,
+    // patricia_large,
+    // patricia_small,
 
     /* Office */
     // gs_large,
