@@ -106,7 +106,7 @@ void* thread_task(void *arg)
         name = mibench_function_names[task_matrix[task_id][i]];
         printf(GREEN_C "Task id (%s) %d,\t instance %ld\n" RESET_C, name, task_id, i);
     }
-    printf("Thread %d finished\n", task_id)
+    // printf("Thread %d finished\n", task_id)
 
 }
 
@@ -141,7 +141,7 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    setup();
+    // setup();
     sleep(10);
     // for (int i = 0; i < NUM_THREADS; i++)
     // {
