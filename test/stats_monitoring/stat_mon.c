@@ -52,7 +52,7 @@ void print_matrix(int* ptr, long rows, long cols)
 
 void init_task_matrix()
 {
-    int task_id_array[NUM_THREADS] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};//, 14, 15, 16, 17, 18, 19, 20, 21};
+    int task_id_array[NUM_THREADS] = {0, 1};//, 2, 3};//, 4, 5, 6, 7, 8, 9};//, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21};
 
     for (long i = 0; i < NUM_EXECUTIONS; i++)
     {
@@ -67,7 +67,7 @@ void init_task_matrix()
 
 void init_delay_matrix()
 {
-    long delay_array[NUM_THREADS] = {0, 1000, 200, 3000, 400, 5000, 600, 7000, 800, 9000, 100, 1100, 1200, 1300};//, 1400, 15000, 16000, 17000, 18000, 19000, 20000, 21000};
+    long delay_array[NUM_THREADS] = {0, 1000};//, 200, 3000};//, 400, 5000, 600, 7000, 800, 9000};//, 100, 1100, 1200, 1300, 1400, 15000, 16000, 17000, 18000, 19000, 20000, 21000};
 
     for (long i = 0; i < NUM_EXECUTIONS; i++)
     {
@@ -103,8 +103,9 @@ void* thread_task(void *arg)
     {
         usleep(delay_matrix[task_id][i]);
         mibench_functions[task_matrix[task_id][i]]();
-        // printf("Task[%d] %s, instance %ld\n", task_id, mibench_function_names[task_matrix[task_id][i]], i);
+        printf("Task[%d] %s, instance %ld\n", task_id, mibench_function_names[task_matrix[task_id][i]], i);
     }
+    printf("Thread[%d], finished\n", task_id);
 
 }
 
@@ -131,8 +132,8 @@ int main()
 {
     struct sched_param param;
 
-    pin_thread_to_core(CORE);
-    sleep(1);
+    // pin_thread_to_core(CORE);
+    // sleep(1);
     param.sched_priority = 60;
     if (sched_setscheduler(0, SCHED_FIFO, &param) == -1) {
         perror("sched_setscheduler");
@@ -140,12 +141,12 @@ int main()
     }
 
     setup();
-    usleep(500000);
-    for (int i = 0; i < 1000; i++)
-    {
-        usleep(5000);
-        sched_yield();
-    }
+    sleep(5);
+    // for (int i = 0; i < 1000; i++)
+    // {
+    //     usleep(5000);
+    //     sched_yield();
+    // }
     // for (int i = 0; i < NUM_THREADS; i++)
     // {
     //     pthread_join(threads[i], NULL);
