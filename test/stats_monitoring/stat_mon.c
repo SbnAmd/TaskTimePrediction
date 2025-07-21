@@ -101,9 +101,9 @@ void* thread_task(void *arg)
     // printf("Task id %d\n", task_id);
     for (long i = 0; i < NUM_EXECUTIONS; i++)
     {
-        usleep(delay_matrix[task_id][i]);
-        mibench_functions[task_matrix[task_id][i]]();
-        printf("Task[%d] %s, instance %ld\n", task_id, mibench_function_names[task_matrix[task_id][i]], i);
+        usleep(delay_matrix[i][task_id]);
+        mibench_functions[task_matrix[i][task_id]]();
+        printf("Task[%d] %s, instance %ld\n", task_id, mibench_function_names[task_matrix[i][task_id]], i);
     }
     printf("Thread[%d], finished\n", task_id);
 
