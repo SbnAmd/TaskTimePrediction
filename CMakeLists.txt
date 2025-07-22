@@ -42,6 +42,12 @@ add_executable(ExecutionPrediction
 #        test/stats_monitoring/stat_mon.h
         perf_count/perf_count.c
         perf_count/perf_count.h
+        src/data_structure/timepoint.c
+        src/data_structure/timepoint.h
+        src/data_structure/tp_stack.c
+        src/data_structure/tp_stack.h
+        src/data_structure/timeslice.c
+        src/data_structure/timeslice.h
 
 )
 target_link_libraries(ExecutionPrediction PUBLIC
