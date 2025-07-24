@@ -9,7 +9,7 @@
 
 
 // Function to initialize the stack
-void initStack(TPStack *stack) {
+void initStack_tp(TPStack *stack) {
     stack->capacity = INITIAL_CAPACITY;
     stack->top = -1;
     stack->data = (struct timepoint*)malloc(sizeof(struct timepoint) * stack->capacity);
@@ -20,7 +20,7 @@ void initStack(TPStack *stack) {
 }
 
 // Push value to stack
-void push(TPStack *stack, struct timepoint value) {
+void push_tp(TPStack *stack, struct timepoint value) {
     if (stack->top + 1 >= stack->capacity) {
         stack->capacity *= 2;
         stack->data = (struct timepoint *)realloc(stack->data, sizeof(struct timepoint) * stack->capacity);
@@ -33,7 +33,7 @@ void push(TPStack *stack, struct timepoint value) {
 }
 
 // Pop value from stack
-struct timepoint pop(TPStack *stack) {
+struct timepoint pop_tp(TPStack *stack) {
     if (stack->top < 0) {
         fprintf(stderr, "Stack underflow!\n");
         exit(EXIT_FAILURE);
@@ -42,7 +42,7 @@ struct timepoint pop(TPStack *stack) {
 }
 
 // Peek top value
-struct timepoint peek(TPStack *stack) {
+struct timepoint peek_tp(TPStack *stack) {
     if (stack->top < 0) {
         fprintf(stderr, "Stack is empty!\n");
         exit(EXIT_FAILURE);
@@ -51,12 +51,12 @@ struct timepoint peek(TPStack *stack) {
 }
 
 // Check if stack is empty
-bool isEmpty(TPStack *stack) {
+bool isEmpty_tp(TPStack *stack) {
     return stack->top == -1;
 }
 
 // Free the stack
-void freeStack(TPStack *stack) {
+void freeStack_tp(TPStack *stack) {
     free(stack->data);
     stack->data = NULL;
     stack->top = -1;
