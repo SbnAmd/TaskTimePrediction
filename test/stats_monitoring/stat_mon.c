@@ -111,6 +111,7 @@ void* thread_task(void *arg)
         pthread_mutex_lock(&mutex);
         reg_tp(&tp, g_preemption_counter, mibench_function_names[task_id], task_id);
         push_tp(&tpstack, tp);
+        printf("**Pushed task %s with prio %d\n", tp.task_name, tp.priority);
         pthread_mutex_unlock(&mutex);
 
         // usleep(delay_matrix[i][task_id]);
@@ -120,6 +121,7 @@ void* thread_task(void *arg)
         reg_tp(&tp, g_preemption_counter, mibench_function_names[task_id], task_id);
         save_time_slice(&tp, &tpstack, &timeslice_array[i]);
         pop_tp(&tpstack);
+        printf("//Poped task %s with prio %d\n", tp.task_name, tp.priority);
         pthread_mutex_unlock(&mutex);
 
         printf("Task[%d] %s, instance %ld\n", task_id, mibench_function_names[task_matrix[i][task_id]], i);
