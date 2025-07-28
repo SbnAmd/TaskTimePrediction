@@ -9,7 +9,10 @@ long delay_matrix[NUM_EXECUTIONS][NUM_THREADS];
 pthread_t threads[NUM_THREADS];
 int priority_array[NUM_THREADS];
 int thread_ids[NUM_THREADS];
-
+int g_stop;
+TPStack_t tpstack;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+long g_preemption_counter = 0;
 // Fisher-Yates shuffle for int array
 static void shuffle_int_array(int *array, int n)
 {
@@ -92,19 +95,37 @@ void* thread_task(void *arg)
 {
     int task_id = *((int*) arg);
     // long execution_counter = 0;
-
+    initStack_tp(&tpstack);
     if (task_id >= NUM_THREADS)
     {
         perror("The Task_id exceeded NUM_THREADS");
         exit(1);
     }
+    timeslice_t* timeslice_array = malloc(sizeof(timeslice_t) * TIMESLICE_LEN);
+    timepoint_t tp;
+
     // printf("Task id %d\n", task_id);
     for (long i = 0; i < NUM_EXECUTIONS; i++)
     {
-        usleep(delay_matrix[i][task_id]);
+        /* Register current timepoint */
+        pthread_mutex_lock(&mutex);
+        reg_tp(&tp, g_preemption_counter, mibench_function_names[task_id], task_id);
+        push_tp(&tpstack, tp);
+        pthread_mutex_unlock(&mutex);
+
+        // usleep(delay_matrix[i][task_id]);
         mibench_functions[task_matrix[i][task_id]]();
+
+        pthread_mutex_lock(&mutex);
+        reg_tp(&tp, g_preemption_counter, mibench_function_names[task_id], task_id);
+        save_time_slice(&tp, &tpstack, &timeslice_array[i]);
+        pop_tp(&tpstack);
+        pthread_mutex_unlock(&mutex);
+
         printf("Task[%d] %s, instance %ld\n", task_id, mibench_function_names[task_matrix[i][task_id]], i);
+        printf("Task_ID[%d] \n\t Slice[%d]\n\t\t duration = %ld\n", task_id, i, timeslice_array[i].duration);
     }
+
     printf("Thread[%d], finished\n", task_id);
 }
 
@@ -134,24 +155,27 @@ int main()
 
     // pin_thread_to_core(CORE);
     // sleep(1);
-    param.sched_priority = 60;
-    if (sched_setscheduler(0, SCHED_FIFO, &param) == -1) {
-        perror("sched_setscheduler");
-        exit(EXIT_FAILURE);
-    }
+    // param.sched_priority = 60;
+    // if (sched_setscheduler(0, SCHED_FIFO, &param) == -1) {
+    //     perror("sched_setscheduler");
+    //     exit(EXIT_FAILURE);
+    // }
 
     setup();
     // sleep(5);
-    for (int i = 0; i < 1000; i++)
-    {
-        usleep(5000);
-        sched_yield();
-    }
+    // for (int i = 0; i < 1000; i++)
+    // {
+    //     usleep(5000);
+    //     sched_yield();
+    // }
+    usleep(5000000);
     // for (int i = 0; i < NUM_THREADS; i++)
     // {
     //     pthread_join(threads[i], NULL);
     // }
-
+    g_stop = 1;
+    usleep(500000);
+    printf("Exiting main thread\n");
     return 0;
 
 };

@@ -8,20 +8,32 @@
 
 #include <time.h>
 #include "perf.h"
-#include "tp_stack.h"
-#include "timeslice.h"
 
-struct timepoint
-{
+
+typedef struct {
     struct timespec time;
     struct perf_param perf_param;
     long preemption;
     char* task_name;
     int priority;
 
-};
+}timepoint_t;
 
-void reg_tp(struct timepoint* tp, long preemption, const char* task_name, int priority);
-void save_time_slice(struct timepoint* end_tp, struct TPStack* tpstack, struct timeslice* ts_entry);
+typedef struct
+{
+    long duration;
+    int interrupts;
+    struct timespec start_time;
+    char* name;
+}timeslice_t;
+
+typedef struct{
+    timepoint_t *data;
+    int top;
+    int capacity;
+} TPStack_t;
+
+void reg_tp(timepoint_t* tp, long preemption, const char* task_name, int priority);
+void save_time_slice(timepoint_t* end_tp, TPStack_t* tpstack, timeslice_t* ts_entry);
 
 #endif //TIMEPOINT_H

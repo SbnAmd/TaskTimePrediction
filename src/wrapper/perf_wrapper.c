@@ -2,10 +2,10 @@
 
 /* Array of task status structs.  One for each thread.  Each thread has its own */
 struct task_stat task_stat_arr[NUM_THREADS];
-struct timeslice** ptr_slice_array[NUM_THREADS];
+timeslice_t** ptr_slice_array[NUM_THREADS];
 /* Stack for holding preempted tasks */
 IntStack preemption_stack;
-struct TPStack tpstack;
+TPStack_t tpstack;
 long g_preemption_counter = 0;
 /* Mutex for accessing the stack */
 pthread_mutex_t stack_mtx;
@@ -33,8 +33,8 @@ void* perf_wrapper(void *arg) {
     int old_task_id;
     long task_count = 0;
     srand(time(NULL));
-    struct timeslice* timeslice_array = (struct timeslice*)malloc(sizeof(struct timeslice) * TIMESLICE_LEN);
-    struct timepoint tp;
+    timeslice_t* timeslice_array = malloc(sizeof(timeslice_t) * TIMESLICE_LEN);
+    timepoint_t tp;
     /* Initializing the status of each thread */
     init_task_status(task_id, task_stat_arr);
 
@@ -78,6 +78,7 @@ void* perf_wrapper(void *arg) {
         usleep(10000);
         task_count++;
     }
+
 
 #ifdef RECORD_PERF_COUNT
 

@@ -46,8 +46,6 @@ add_executable(ExecutionPrediction
         src/data_structure/timepoint.h
         src/data_structure/tp_stack.c
         src/data_structure/tp_stack.h
-        src/data_structure/timeslice.c
-        src/data_structure/timeslice.h
 
 )
 target_link_libraries(ExecutionPrediction PUBLIC

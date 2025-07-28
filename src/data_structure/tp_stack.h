@@ -6,17 +6,13 @@
 #define TP_STACK_H
 #include "timepoint.h"
 
-typedef struct {
-    struct timepoint *data;
-    int top;
-    int capacity;
-} TPStack;
 
-void initStack_tp(struct TPStack *stack);
-void push_tp(struct TPStack *stack, struct timepoint value);
-struct timepoint pop_tp(struct TPStack *stack);
-struct timepoint peek_tp(struct TPStack *stack);
-bool isEmpty_tp(struct TPStack *stack);
-void freeStack_tp(struct TPStack *stack);
+
+void initStack_tp(TPStack_t *stack);
+void push_tp(TPStack_t *stack, timepoint_t value);
+timepoint_t pop_tp(TPStack_t *stack);
+timepoint_t peek_tp(TPStack_t *stack);
+bool isEmpty_tp(TPStack_t *stack);
+void freeStack_tp(TPStack_t *stack);
 
 #endif //TP_STACK_H

@@ -4,7 +4,9 @@
 
 #include "timepoint.h"
 
-void reg_tp(struct timepoint* tp, long preemption, const char* task_name, int priority)
+#include "tp_stack.h"
+
+void reg_tp(timepoint_t* tp, long preemption, const char* task_name, int priority)
 {
     clock_gettime(CLOCK_MONOTONIC, &tp->time);
 
@@ -14,12 +16,8 @@ void reg_tp(struct timepoint* tp, long preemption, const char* task_name, int pr
     tp->priority = priority;
 }
 
-void add_to_tp_stack(struct timepoint* tp, TPStack* tpstack)
-{
-    push_tp(tpstack, *tp);
-}
 
-void create_timeslice(struct timeslice* ts, struct timepoint* start_tp, struct timepoint* end_tp)
+void create_timeslice(timeslice_t* ts, timepoint_t* start_tp, timepoint_t* end_tp)
 {
     ts->duration = (end_tp->time.tv_sec - start_tp->time.tv_sec) * 1000000000 + (end_tp->time.tv_nsec - start_tp->time.tv_nsec);
     ts->interrupts = (int)(end_tp->preemption - start_tp->preemption);
@@ -27,9 +25,9 @@ void create_timeslice(struct timeslice* ts, struct timepoint* start_tp, struct t
     ts->name = strdup(start_tp->task_name);
 }
 
-void save_time_slice(struct timepoint* end_tp, struct TPStack* tpstack, struct timeslice* ts_entry)
+void save_time_slice(timepoint_t* end_tp, TPStack_t* tpstack, timeslice_t* ts_entry)
 {
-    struct timepoint ltp = peek_tp(tpstack);
+    timepoint_t ltp = peek_tp(tpstack);
 
     if (end_tp->priority != ltp.priority || strcmp(end_tp->task_name, ltp.task_name)!=0)
     {

@@ -9,10 +9,10 @@
 
 
 // Function to initialize the stack
-void initStack_tp(TPStack *stack) {
+void initStack_tp(TPStack_t *stack) {
     stack->capacity = INITIAL_CAPACITY;
     stack->top = -1;
-    stack->data = (struct timepoint*)malloc(sizeof(struct timepoint) * stack->capacity);
+    stack->data = (timepoint_t*)malloc(sizeof(timepoint_t) * stack->capacity);
     if (stack->data == NULL) {
         perror("Failed to allocate memory for timepoint stack");
         exit(EXIT_FAILURE);
@@ -20,10 +20,10 @@ void initStack_tp(TPStack *stack) {
 }
 
 // Push value to stack
-void push_tp(TPStack *stack, struct timepoint value) {
+void push_tp(TPStack_t *stack, timepoint_t value) {
     if (stack->top + 1 >= stack->capacity) {
         stack->capacity *= 2;
-        stack->data = (struct timepoint *)realloc(stack->data, sizeof(struct timepoint) * stack->capacity);
+        stack->data = (timepoint_t *)realloc(stack->data, sizeof(timepoint_t) * stack->capacity);
         if (stack->data == NULL) {
             perror("Failed to reallocate memory for timepoint stack");
             exit(EXIT_FAILURE);
@@ -33,7 +33,7 @@ void push_tp(TPStack *stack, struct timepoint value) {
 }
 
 // Pop value from stack
-struct timepoint pop_tp(TPStack *stack) {
+timepoint_t pop_tp(TPStack_t *stack) {
     if (stack->top < 0) {
         fprintf(stderr, "Stack underflow!\n");
         exit(EXIT_FAILURE);
@@ -42,7 +42,7 @@ struct timepoint pop_tp(TPStack *stack) {
 }
 
 // Peek top value
-struct timepoint peek_tp(TPStack *stack) {
+timepoint_t peek_tp(TPStack_t *stack) {
     if (stack->top < 0) {
         fprintf(stderr, "Stack is empty!\n");
         exit(EXIT_FAILURE);
@@ -51,35 +51,14 @@ struct timepoint peek_tp(TPStack *stack) {
 }
 
 // Check if stack is empty
-bool isEmpty_tp(TPStack *stack) {
+bool isEmpty_tp(TPStack_t *stack) {
     return stack->top == -1;
 }
 
 // Free the stack
-void freeStack_tp(TPStack *stack) {
+void freeStack_tp(TPStack_t *stack) {
     free(stack->data);
     stack->data = NULL;
     stack->top = -1;
     stack->capacity = 0;
 }
-
-// Demo
-/*int main() {
-    TPStack stack;
-    initStack(&stack);
-
-    push(&stack, 10);
-    push(&stack, 20);
-    push(&stack, 30);
-
-    printf("Top of stack: %d\n", peek(&stack));
-    printf("Popped: %d\n", pop(&stack));
-    printf("Popped: %d\n", pop(&stack));
-
-    if (!isEmpty(&stack)) {
-        printf("Top of stack now: %d\n", peek(&stack));
-    }
-
-    freeStack(&stack);
-    return 0;
-}*/
