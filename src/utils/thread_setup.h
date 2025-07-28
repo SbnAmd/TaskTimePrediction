@@ -9,6 +9,7 @@
 #include "../data_structure/barrier.h"
 #include "../perf_event/perf.h"
 #include "utils.h"
+#include "tp_stack.h"
 #define MAX_PRIORITY 90
 #define MIN_PRIORITY 30
 

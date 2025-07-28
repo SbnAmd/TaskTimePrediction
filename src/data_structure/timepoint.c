@@ -4,7 +4,7 @@
 
 #include "timepoint.h"
 
-void reg_tp(struct timepoint* tp, long preemption, char* task_name, int priority)
+void reg_tp(struct timepoint* tp, long preemption, const char* task_name, int priority)
 {
     clock_gettime(CLOCK_MONOTONIC, &tp->time);
 
@@ -27,7 +27,7 @@ void create_timeslice(struct timeslice* ts, struct timepoint* start_tp, struct t
     ts->name = strdup(start_tp->task_name);
 }
 
-void save_time_slice(struct timepoint* end_tp, TPStack* tpstack, struct timeslice* ts_entry)
+void save_time_slice(struct timepoint* end_tp, struct TPStack* tpstack, struct timeslice* ts_entry)
 {
     struct timepoint ltp = peek_tp(tpstack);
 

@@ -8,6 +8,9 @@
 #include "def.h"
 #include "barrier.h"
 #include "helper_functions.h"
+#include "timeslice.h"
+#include "timepoint.h"
+#include "tp_stack.h"
 #include "mibench.h"
 
 void* perf_wrapper(void *arg);

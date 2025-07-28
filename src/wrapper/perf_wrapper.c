@@ -2,10 +2,11 @@
 
 /* Array of task status structs.  One for each thread.  Each thread has its own */
 struct task_stat task_stat_arr[NUM_THREADS];
-
+struct timeslice** ptr_slice_array[NUM_THREADS];
 /* Stack for holding preempted tasks */
 IntStack preemption_stack;
-
+struct TPStack tpstack;
+long g_preemption_counter = 0;
 /* Mutex for accessing the stack */
 pthread_mutex_t stack_mtx;
 
@@ -32,7 +33,8 @@ void* perf_wrapper(void *arg) {
     int old_task_id;
     long task_count = 0;
     srand(time(NULL));
-
+    struct timeslice* timeslice_array = (struct timeslice*)malloc(sizeof(struct timeslice) * TIMESLICE_LEN);
+    struct timepoint tp;
     /* Initializing the status of each thread */
     init_task_status(task_id, task_stat_arr);
 
@@ -48,6 +50,16 @@ void* perf_wrapper(void *arg) {
     /* Main loop of the thread */
     while (!g_stop) {
 
+        // todo : add lock
+        if (!isEmpty(&preemption_stack))
+        {
+            g_preemption_counter++;
+        }
+
+        /* Register current timepoint */
+        reg_tp(&tp, g_preemption_counter, mibench_function_names[task_id], task_id);
+        push_tp(&tpstack, tp);
+
         /* Check if any task is preempted.  If so, changes the status of the task. */
         old_task_id = check_status(task_id, task_stat_arr, &preemption_stack);
 
@@ -56,6 +68,11 @@ void* perf_wrapper(void *arg) {
 
         /* After finishing the workload, the task status is updated. */
         return_status(task_id, old_task_id, task_stat_arr, &preemption_stack);
+
+        /* Save timeslice */
+        reg_tp(&tp, g_preemption_counter, mibench_function_names[task_id], task_id);
+        save_time_slice(&tp, &tpstack, &timeslice_array[task_count]);
+        pop_tp(&tpstack);
 
         /* To add some variation in execution time, we sleep for a random amount of time. */
         usleep(10000);

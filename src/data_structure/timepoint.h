@@ -21,5 +21,7 @@ struct timepoint
 
 };
 
+void reg_tp(struct timepoint* tp, long preemption, const char* task_name, int priority);
+void save_time_slice(struct timepoint* end_tp, struct TPStack* tpstack, struct timeslice* ts_entry);
 
 #endif //TIMEPOINT_H

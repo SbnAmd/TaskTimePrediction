@@ -28,6 +28,7 @@
 #define NUM_THREADS     4
 #define CORE            5
 #define INSTANCE_LIMIT  200
+#define TIMESLICE_LEN   1000000
 
 #define RECORD_PERF_COUNT
 

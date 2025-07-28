@@ -8,6 +8,7 @@ int sched_id;
 int priority_array[NUM_THREADS];
 barrier_t barrier;
 extern IntStack preemption_stack;
+extern TPStack tpstack;
 struct timespec g_start_time;
 
 
@@ -26,6 +27,7 @@ void init_tasks(){
     pin_thread_to_core(CORE);
     usleep(100000);
     initStack(&preemption_stack);
+    initStack_tp(&tpstack);
     barrier_init(&barrier, NUM_THREADS);
 
     for (int i = 0; i < NUM_THREADS; i++) {
