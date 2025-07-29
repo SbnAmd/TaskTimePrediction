@@ -40,4 +40,4 @@ Analyzing these events helps understand task runtime behavior and improves the a
 ---
 
 **Note:**  
-Development is ongoing. Contributions are welcome!
+🔴 Development is suspended. Contributions are welcome!
