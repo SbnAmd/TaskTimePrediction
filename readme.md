@@ -31,6 +31,7 @@ Analyzing these events helps understand task runtime behavior and improves the a
   Six performance events are currently used to predict and evaluate execution time precision. Events are enabled, read, and disabled in groups for efficiency.
 - **Benchmark Integration:**  
   The MiBench benchmark suite is integrated (some benchmarks remain due to legacy issues).
+- **🔴 Because preemption is not working according to threads priority with SCHED_FIFO, this project is not going to work. Works must be done to fix this.** 
 
 ## Future Work
 
