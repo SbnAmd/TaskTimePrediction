@@ -32,7 +32,8 @@ void save_time_slice(timepoint_t* end_tp, TPStack_t* tpstack, timeslice_t* ts_en
     if (end_tp->priority != ltp.priority || strcmp(end_tp->task_name, ltp.task_name)!=0)
     {
         perror("TPStack task mismatch!");
-        exit(1);
+        sched_yield();
+        // exit(1);
     }
 
     create_timeslice(ts_entry, &ltp, end_tp);
